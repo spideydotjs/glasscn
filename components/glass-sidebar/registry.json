@@ -1,0 +1,17 @@
+{
+  "name": "glass-sidebar",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-sidebar/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-sidebar/styles.css",
+      "type": "style"
+    }
+  ]
+}

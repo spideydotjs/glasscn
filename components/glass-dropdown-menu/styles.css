@@ -1,0 +1,80 @@
+.glass-dropdown-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.glass-dropdown-trigger {
+  display: inline-flex;
+}
+
+.glass-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 0.35rem;
+  z-index: 400;
+  min-width: 160px;
+  padding: 0.25rem;
+  border-radius: var(--glass-radius);
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+/* Glass Variants */
+.glass-dropdown-menu[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.glass-dropdown-menu[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 4px 12px var(--glass-shadow-liquid);
+}
+
+.glass-dropdown-menu[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 2px 6px var(--glass-shadow-matte);
+}
+
+.glass-dropdown-item {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--glass-text);
+  cursor: pointer;
+  border-radius: calc(var(--glass-radius) - 2px);
+  transition: all var(--glass-speed-fast) ease;
+  outline: none;
+}
+
+.glass-dropdown-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.glass-dropdown-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.glass-dropdown-menu[data-glass="frosted"] .glass-dropdown-item:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.glass-dropdown-menu[data-glass="liquid"] .glass-dropdown-item:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.25);
+}

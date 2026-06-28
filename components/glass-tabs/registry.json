@@ -1,0 +1,17 @@
+{
+  "name": "glass-tabs",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-tabs/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-tabs/styles.css",
+      "type": "style"
+    }
+  ]
+}

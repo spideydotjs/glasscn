@@ -1,0 +1,423 @@
+{
+  "$schema": "https://glassify.dev/schema.json",
+  "name": "glassify",
+  "version": "0.1.0",
+  "components": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "files": [
+        {
+          "path": "components/button/index.tsx",
+          "type": "component"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "name": "glass-card",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-card/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-card/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-panel",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-panel/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-panel/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-navbar",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-navbar/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-navbar/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-sidebar",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-sidebar/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-sidebar/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-drawer",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-drawer/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-drawer/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-button",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-button/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-button/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-input",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-input/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-input/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-textarea",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-textarea/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-textarea/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-select",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-select/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-select/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-checkbox",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-checkbox/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-checkbox/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-radio",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-radio/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-radio/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-toggle",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-toggle/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-toggle/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-slider",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-slider/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-slider/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-modal",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-modal/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-modal/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-tooltip",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-tooltip/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-tooltip/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-toast",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-toast/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-toast/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-alert",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-alert/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-alert/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-badge",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-badge/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-badge/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-progress",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-progress/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-progress/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-tabs",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-tabs/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-tabs/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-breadcrumb",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-breadcrumb/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-breadcrumb/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-pagination",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-pagination/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-pagination/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-dropdown-menu",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-dropdown-menu/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-dropdown-menu/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-avatar",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-avatar/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-avatar/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-table",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-table/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-table/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-accordion",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-accordion/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-accordion/styles.css",
+          "type": "style"
+        }
+      ]
+    },
+    {
+      "name": "glass-calendar",
+      "type": "registry:ui",
+      "dependencies": ["react"],
+      "files": [
+        {
+          "path": "components/glass-calendar/index.tsx",
+          "type": "component"
+        },
+        {
+          "path": "components/glass-calendar/styles.css",
+          "type": "style"
+        }
+      ]
+    }
+  ]
+}

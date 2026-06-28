@@ -1,0 +1,17 @@
+{
+  "name": "glass-toast",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-toast/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-toast/styles.css",
+      "type": "style"
+    }
+  ]
+}

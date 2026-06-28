@@ -1,0 +1,72 @@
+.glass-pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--glass-font-sans);
+  box-sizing: border-box;
+}
+
+.glass-pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 0.4rem;
+  border-radius: var(--glass-radius);
+  border: var(--glass-border-width) solid transparent;
+  background: transparent;
+  color: var(--glass-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--glass-speed-normal) ease;
+  outline: none;
+}
+
+.glass-pagination-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Glass Variants */
+.glass-pagination[data-glass="frosted"] .glass-pagination-btn {
+  background: var(--glass-bg-frosted);
+  border-color: var(--glass-border-frosted);
+}
+.glass-pagination[data-glass="frosted"] .glass-pagination-btn:hover:not(:disabled) {
+  background: var(--glass-primary-hover);
+}
+.glass-pagination[data-glass="frosted"] .glass-pagination-btn-active {
+  background: var(--glass-text) !important;
+  border-color: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
+}
+
+.glass-pagination[data-glass="liquid"] .glass-pagination-btn {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  border-color: var(--glass-border-liquid);
+}
+.glass-pagination[data-glass="liquid"] .glass-pagination-btn:hover:not(:disabled) {
+  opacity: 0.85;
+}
+.glass-pagination[data-glass="liquid"] .glass-pagination-btn-active {
+  background: var(--glass-text) !important;
+  border-color: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
+}
+
+.glass-pagination[data-glass="matte"] .glass-pagination-btn {
+  background: var(--glass-bg-matte);
+  border-color: var(--glass-border-matte);
+}
+.glass-pagination[data-glass="matte"] .glass-pagination-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.05);
+}
+.glass-pagination[data-glass="matte"] .glass-pagination-btn-active {
+  background: var(--glass-text) !important;
+  border-color: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
+}

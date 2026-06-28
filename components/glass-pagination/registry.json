@@ -1,0 +1,17 @@
+{
+  "name": "glass-pagination",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-pagination/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-pagination/styles.css",
+      "type": "style"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+.glass-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.glass-modal-container {
+  width: 100%;
+  max-width: 500px;
+  border-radius: calc(var(--glass-radius) * 1.5);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+  overflow: hidden;
+  animation: glass-modal-in var(--glass-speed-normal) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes glass-modal-in {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Glass Variants */
+.glass-modal-container[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-frosted);
+  -webkit-backdrop-filter: var(--glass-filter-frosted);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 20px 50px 0 var(--glass-shadow-frosted);
+}
+
+.glass-modal-container[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite, glass-modal-in var(--glass-speed-normal) cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 20px 50px 0 var(--glass-shadow-liquid);
+}
+
+.glass-modal-container[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 10px 30px 0 var(--glass-shadow-matte);
+}
+
+.glass-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: var(--glass-border-width) solid var(--glass-border-frosted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.glass-modal-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--glass-text);
+}
+
+.glass-modal-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--glass-text);
+  opacity: 0.6;
+  transition: opacity var(--glass-speed-fast) ease;
+}
+
+.glass-modal-close-btn:hover {
+  opacity: 1;
+}
+
+.glass-modal-content {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: 60vh;
+  color: var(--glass-text);
+  line-height: 1.5;
+}
+
+.glass-modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: var(--glass-border-width) solid var(--glass-border-frosted);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}

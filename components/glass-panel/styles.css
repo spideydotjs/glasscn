@@ -1,0 +1,54 @@
+.glass-panel {
+  padding: 1.5rem;
+  border-radius: calc(var(--glass-radius) * 1.5);
+  color: var(--glass-text);
+  font-family: var(--glass-font-sans);
+  box-sizing: border-box;
+}
+
+.glass-panel[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-frosted);
+  -webkit-backdrop-filter: var(--glass-filter-frosted);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 10px 40px 0 var(--glass-shadow-frosted);
+}
+
+.glass-panel[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 10px 40px 0 var(--glass-shadow-liquid);
+}
+
+.glass-panel[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 6px 20px 0 var(--glass-shadow-matte);
+}
+
+.glass-panel-header {
+  margin-bottom: 1.25rem;
+}
+
+.glass-panel-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.glass-panel-description {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  color: var(--glass-text-muted);
+}
+
+.glass-panel-body {
+  font-size: 1rem;
+  line-height: 1.5;
+}

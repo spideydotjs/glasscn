@@ -1,0 +1,17 @@
+{
+  "name": "glass-panel",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-panel/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-panel/styles.css",
+      "type": "style"
+    }
+  ]
+}

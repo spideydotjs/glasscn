@@ -1,0 +1,17 @@
+{
+  "name": "glass-progress",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-progress/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-progress/styles.css",
+      "type": "style"
+    }
+  ]
+}

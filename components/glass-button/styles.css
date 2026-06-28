@@ -1,0 +1,130 @@
+.glass-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--glass-radius);
+  font-family: var(--glass-font-sans);
+  font-weight: 500;
+  cursor: pointer;
+  outline: none;
+  border: var(--glass-border-width) solid transparent;
+  transition: all var(--glass-speed-normal) ease;
+  box-sizing: border-box;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Sizes */
+.glass-button-sm {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.825rem;
+}
+
+.glass-button-md {
+  padding: 0.55rem 1.1rem;
+  font-size: 0.925rem;
+}
+
+.glass-button-lg {
+  padding: 0.7rem 1.4rem;
+  font-size: 1.05rem;
+}
+
+/* Glass & Variant Combinations */
+
+/* Frosted */
+.glass-button[data-glass="frosted"] {
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  box-shadow: 0 4px 12px var(--glass-shadow-frosted);
+}
+.glass-button[data-glass="frosted"].glass-button-solid {
+  background: var(--glass-primary);
+  color: #ffffff;
+}
+.glass-button[data-glass="frosted"].glass-button-solid:hover {
+  background: var(--glass-primary-hover);
+}
+.glass-button[data-glass="frosted"].glass-button-outline {
+  background: var(--glass-bg-frosted);
+  border-color: var(--glass-border-frosted);
+  color: var(--glass-text);
+}
+.glass-button[data-glass="frosted"].glass-button-outline:hover {
+  background: var(--glass-primary-hover);
+}
+.glass-button[data-glass="frosted"].glass-button-ghost {
+  background: transparent;
+  color: var(--glass-text);
+}
+.glass-button[data-glass="frosted"].glass-button-ghost:hover {
+  background: var(--glass-bg-frosted);
+}
+
+/* Liquid */
+.glass-button[data-glass="liquid"] {
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  box-shadow: 0 4px 12px var(--glass-shadow-liquid);
+}
+.glass-button[data-glass="liquid"].glass-button-solid {
+  background: var(--glass-bg-liquid);
+  color: var(--glass-text);
+  border-color: var(--glass-border-liquid);
+}
+.glass-button[data-glass="liquid"].glass-button-solid:hover {
+  box-shadow: 0 0 12px var(--glass-primary);
+}
+.glass-button[data-glass="liquid"].glass-button-outline {
+  background: transparent;
+  border-color: var(--glass-border-liquid);
+  color: var(--glass-text);
+}
+.glass-button[data-glass="liquid"].glass-button-outline:hover {
+  background: var(--glass-bg-liquid);
+}
+.glass-button[data-glass="liquid"].glass-button-ghost {
+  background: transparent;
+  color: var(--glass-text);
+}
+.glass-button[data-glass="liquid"].glass-button-ghost:hover {
+  background: var(--glass-primary);
+  box-shadow: inset 0 0 8px var(--glass-primary);
+}
+
+/* Matte */
+.glass-button[data-glass="matte"] {
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  box-shadow: 0 2px 6px var(--glass-shadow-matte);
+}
+.glass-button[data-glass="matte"].glass-button-solid {
+  background: var(--glass-text);
+  color: var(--glass-text-inverse);
+}
+.glass-button[data-glass="matte"].glass-button-solid:hover {
+  opacity: 0.9;
+}
+.glass-button[data-glass="matte"].glass-button-outline {
+  background: var(--glass-bg-matte);
+  border-color: var(--glass-border-matte);
+  color: var(--glass-text);
+}
+.glass-button[data-glass="matte"].glass-button-outline:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+.glass-button[data-glass="matte"].glass-button-ghost {
+  background: transparent;
+  color: var(--glass-text);
+}
+.glass-button[data-glass="matte"].glass-button-ghost:hover {
+  background: var(--glass-bg-matte);
+}

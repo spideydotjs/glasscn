@@ -1,0 +1,86 @@
+.glass-accordion {
+  border-radius: var(--glass-radius);
+  font-family: var(--glass-font-sans);
+  color: var(--glass-text);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Glass Variants */
+.glass-accordion[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 4px 12px var(--glass-shadow-frosted);
+}
+
+.glass-accordion[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 4px 12px var(--glass-shadow-liquid);
+}
+
+.glass-accordion[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+}
+
+.glass-accordion-trigger {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--glass-text);
+  font-weight: 500;
+  text-align: left;
+  outline: none;
+  transition: opacity var(--glass-speed-fast) ease;
+}
+
+.glass-accordion-trigger:hover {
+  opacity: 0.85;
+}
+
+.glass-accordion-title {
+  font-size: 0.95rem;
+}
+
+.glass-accordion-icon {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--glass-text);
+  border-bottom: 2px solid var(--glass-text);
+  transform: rotate(45deg);
+  transition: transform var(--glass-speed-normal) ease;
+  margin-right: 0.25rem;
+}
+
+.glass-accordion-open .glass-accordion-icon {
+  transform: rotate(-135deg);
+}
+
+.glass-accordion-content-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--glass-speed-normal) ease-out;
+}
+
+.glass-accordion-open .glass-accordion-content-wrapper {
+  max-height: 500px; /* arbitrary height to slide down */
+}
+
+.glass-accordion-content {
+  padding: 0 1.25rem 1.25rem 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--glass-text-muted);
+}

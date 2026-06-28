@@ -1,0 +1,43 @@
+.glass-progress {
+  width: 100%;
+  height: 8px;
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.glass-progress-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width var(--glass-speed-normal) ease;
+}
+
+/* Glass Variants (Track) */
+.glass-progress[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+}
+.glass-progress-fill[data-glass="frosted"] {
+  background: var(--glass-primary);
+}
+
+.glass-progress[data-glass="liquid"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+}
+.glass-progress-fill[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+}
+
+.glass-progress[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+}
+.glass-progress-fill[data-glass="matte"] {
+  background: var(--glass-text);
+}

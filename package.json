@@ -1,0 +1,12 @@
+{
+  "name": "glassify-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces --if-present",
+    "cli": "node packages/cli/dist/index.js",
+    "preview": "npm run dev --workspace=packages/preview"
+  }
+}

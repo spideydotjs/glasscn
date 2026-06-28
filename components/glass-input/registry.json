@@ -1,0 +1,17 @@
+{
+  "name": "glass-input",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-input/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-input/styles.css",
+      "type": "style"
+    }
+  ]
+}

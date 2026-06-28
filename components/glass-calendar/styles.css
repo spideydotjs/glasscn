@@ -1,0 +1,110 @@
+.glass-calendar {
+  width: 280px;
+  padding: 1rem;
+  border-radius: var(--glass-radius);
+  font-family: var(--glass-font-sans);
+  color: var(--glass-text);
+  box-sizing: border-box;
+}
+
+/* Glass Variants */
+.glass-calendar[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-frosted);
+  -webkit-backdrop-filter: var(--glass-filter-frosted);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow-frosted);
+}
+
+.glass-calendar[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 8px 32px 0 var(--glass-shadow-liquid);
+}
+
+.glass-calendar[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 4px 16px 0 var(--glass-shadow-matte);
+}
+
+.glass-calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.glass-calendar-month-year {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.glass-calendar-nav-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.15rem;
+  cursor: pointer;
+  color: var(--glass-text);
+  opacity: 0.7;
+  transition: opacity var(--glass-speed-fast) ease;
+  line-height: 1;
+}
+
+.glass-calendar-nav-btn:hover {
+  opacity: 1;
+}
+
+.glass-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.glass-calendar-weekday {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--glass-text-muted);
+  padding-bottom: 0.25rem;
+}
+
+.glass-calendar-day {
+  background: transparent;
+  border: none;
+  font-size: 0.825rem;
+  padding: 0.4rem 0;
+  border-radius: var(--glass-radius);
+  cursor: pointer;
+  color: var(--glass-text);
+  transition: all var(--glass-speed-fast) ease;
+  outline: none;
+}
+
+.glass-calendar-day:hover {
+  background: var(--glass-primary);
+}
+
+.glass-calendar[data-glass="frosted"] .glass-calendar-day:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.glass-calendar-day-selected {
+  background: var(--glass-primary) !important;
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
+.glass-calendar[data-glass="liquid"] .glass-calendar-day-selected {
+  background: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
+}
+
+.glass-calendar[data-glass="matte"] .glass-calendar-day-selected {
+  background: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
+}

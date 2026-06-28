@@ -1,0 +1,17 @@
+{
+  "name": "glass-tooltip",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-tooltip/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-tooltip/styles.css",
+      "type": "style"
+    }
+  ]
+}

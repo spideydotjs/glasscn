@@ -1,0 +1,17 @@
+{
+  "name": "glass-badge",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-badge/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-badge/styles.css",
+      "type": "style"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "glass-avatar",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-avatar/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-avatar/styles.css",
+      "type": "style"
+    }
+  ]
+}

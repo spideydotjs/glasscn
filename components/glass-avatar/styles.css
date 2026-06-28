@@ -1,0 +1,68 @@
+.glass-avatar {
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  border: var(--glass-border-width) solid transparent;
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+  font-weight: 600;
+  color: var(--glass-text);
+}
+
+/* Sizes */
+.glass-avatar-sm {
+  width: 32px;
+  height: 32px;
+  font-size: 0.75rem;
+}
+
+.glass-avatar-md {
+  width: 44px;
+  height: 44px;
+  font-size: 0.9rem;
+}
+
+.glass-avatar-lg {
+  width: 60px;
+  height: 60px;
+  font-size: 1.2rem;
+}
+
+/* Glass Variants */
+.glass-avatar[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border-color: var(--glass-border-frosted);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.glass-avatar[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border-color: var(--glass-border-liquid);
+}
+
+.glass-avatar[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border-color: var(--glass-border-matte);
+}
+
+.glass-avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.glass-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}

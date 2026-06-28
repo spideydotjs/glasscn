@@ -1,0 +1,17 @@
+{
+  "name": "glass-button",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-button/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-button/styles.css",
+      "type": "style"
+    }
+  ]
+}

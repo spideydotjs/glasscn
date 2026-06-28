@@ -1,0 +1,17 @@
+{
+  "name": "glass-breadcrumb",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-breadcrumb/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-breadcrumb/styles.css",
+      "type": "style"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "glass-slider",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-slider/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-slider/styles.css",
+      "type": "style"
+    }
+  ]
+}

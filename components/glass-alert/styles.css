@@ -1,0 +1,75 @@
+.glass-alert {
+  padding: 1rem;
+  border-radius: var(--glass-radius);
+  display: flex;
+  gap: 0.75rem;
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+}
+
+/* Glass Variants */
+.glass-alert[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+}
+
+.glass-alert[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+}
+
+.glass-alert[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+}
+
+/* Alert Variants (Coloring & Accents) */
+.glass-alert-info {
+  border-left: 4px solid #3399ff !important;
+  color: var(--glass-text);
+}
+
+.glass-alert-warning {
+  border-left: 4px solid #ffcc00 !important;
+  color: var(--glass-text);
+}
+
+.glass-alert-error {
+  border-left: 4px solid #ff3333 !important;
+  color: var(--glass-text);
+}
+
+.glass-alert-success {
+  border-left: 4px solid #00cc66 !important;
+  color: var(--glass-text);
+}
+
+.glass-alert-icon {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 0.1rem;
+  flex-shrink: 0;
+  font-size: 1.15rem;
+}
+
+.glass-alert-body {
+  flex: 1;
+}
+
+.glass-alert-title {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.glass-alert-content {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}

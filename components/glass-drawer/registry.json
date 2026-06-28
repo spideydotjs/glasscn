@@ -1,0 +1,17 @@
+{
+  "name": "glass-drawer",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-drawer/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-drawer/styles.css",
+      "type": "style"
+    }
+  ]
+}

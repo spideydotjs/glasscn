@@ -1,0 +1,17 @@
+{
+  "name": "glass-radio",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-radio/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-radio/styles.css",
+      "type": "style"
+    }
+  ]
+}

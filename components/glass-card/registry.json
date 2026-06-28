@@ -1,0 +1,17 @@
+{
+  "name": "glass-card",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-card/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-card/styles.css",
+      "type": "style"
+    }
+  ]
+}

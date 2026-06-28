@@ -1,0 +1,85 @@
+.glass-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.glass-tooltip-bubble {
+  position: absolute;
+  z-index: 300;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--glass-speed-fast) ease, transform var(--glass-speed-fast) ease;
+  font-family: var(--glass-font-sans);
+  color: var(--glass-text);
+  box-sizing: border-box;
+}
+
+.glass-tooltip-wrapper:hover .glass-tooltip-bubble {
+  opacity: 1;
+}
+
+/* Glass Variants */
+.glass-tooltip-bubble[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.glass-tooltip-bubble[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 4px 10px var(--glass-shadow-liquid);
+}
+
+.glass-tooltip-bubble[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+}
+
+/* Positions & Triangles/Offsets */
+.glass-tooltip-top {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -6px);
+}
+.glass-tooltip-wrapper:hover .glass-tooltip-top {
+  transform: translate(-50%, -10px);
+}
+
+.glass-tooltip-bottom {
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 6px);
+}
+.glass-tooltip-wrapper:hover .glass-tooltip-bottom {
+  transform: translate(-50%, 10px);
+}
+
+.glass-tooltip-left {
+  right: 100%;
+  top: 50%;
+  transform: translate(-6px, -50%);
+}
+.glass-tooltip-wrapper:hover .glass-tooltip-left {
+  transform: translate(-10px, -50%);
+}
+
+.glass-tooltip-right {
+  left: 100%;
+  top: 50%;
+  transform: translate(6px, -50%);
+}
+.glass-tooltip-wrapper:hover .glass-tooltip-right {
+  transform: translate(10px, -50%);
+}

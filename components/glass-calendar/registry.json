@@ -1,0 +1,17 @@
+{
+  "name": "glass-calendar",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-calendar/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-calendar/styles.css",
+      "type": "style"
+    }
+  ]
+}

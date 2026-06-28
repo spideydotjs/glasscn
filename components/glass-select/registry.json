@@ -1,0 +1,17 @@
+{
+  "name": "glass-select",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-select/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-select/styles.css",
+      "type": "style"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "glass-textarea",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-textarea/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-textarea/styles.css",
+      "type": "style"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+.glass-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 600;
+  width: 320px;
+  max-width: 100vw;
+  padding: 1rem;
+  border-radius: var(--glass-radius);
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  animation: glass-toast-slide-in var(--glass-speed-normal) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes glass-toast-slide-in {
+  from {
+    transform: translateY(20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Glass Variants */
+.glass-toast[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 10px 30px 0 var(--glass-shadow-frosted);
+}
+
+.glass-toast[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite, glass-toast-slide-in var(--glass-speed-normal) cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 10px 30px 0 var(--glass-shadow-liquid);
+}
+
+.glass-toast[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 5px 15px 0 var(--glass-shadow-matte);
+}
+
+.glass-toast-body {
+  flex: 1;
+}
+
+.glass-toast-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--glass-text);
+  margin-bottom: 0.2rem;
+}
+
+.glass-toast-description {
+  font-size: 0.8rem;
+  color: var(--glass-text-muted);
+  line-height: 1.4;
+}
+
+.glass-toast-close-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--glass-text);
+  opacity: 0.5;
+  transition: opacity var(--glass-speed-fast) ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.glass-toast-close-btn:hover {
+  opacity: 1;
+}

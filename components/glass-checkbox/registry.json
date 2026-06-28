@@ -1,0 +1,17 @@
+{
+  "name": "glass-checkbox",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-checkbox/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-checkbox/styles.css",
+      "type": "style"
+    }
+  ]
+}

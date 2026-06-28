@@ -1,0 +1,17 @@
+{
+  "name": "glass-toggle",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-toggle/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-toggle/styles.css",
+      "type": "style"
+    }
+  ]
+}

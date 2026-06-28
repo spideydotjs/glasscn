@@ -1,0 +1,17 @@
+{
+  "name": "glass-modal",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-modal/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-modal/styles.css",
+      "type": "style"
+    }
+  ]
+}

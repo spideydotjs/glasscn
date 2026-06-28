@@ -1,0 +1,17 @@
+{
+  "name": "glass-accordion",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-accordion/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-accordion/styles.css",
+      "type": "style"
+    }
+  ]
+}

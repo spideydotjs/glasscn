@@ -1,0 +1,94 @@
+.glass-drawer {
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  font-family: var(--glass-font-sans);
+  transition: transform var(--glass-speed-normal) ease;
+  visibility: hidden;
+}
+
+.glass-drawer.glass-drawer-open {
+  visibility: visible;
+  transform: translate(0, 0) !important;
+}
+
+/* Positions */
+.glass-drawer-left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 320px;
+  transform: translateX(-100%);
+}
+
+.glass-drawer-right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  transform: translateX(100%);
+}
+
+.glass-drawer-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 300px;
+  transform: translateY(-100%);
+}
+
+.glass-drawer-bottom {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 300px;
+  transform: translateY(100%);
+}
+
+/* Glass Variants */
+.glass-drawer[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-frosted);
+  -webkit-backdrop-filter: var(--glass-filter-frosted);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+  box-shadow: 0 10px 40px 0 var(--glass-shadow-frosted);
+}
+
+.glass-drawer[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+  box-shadow: 0 10px 40px 0 var(--glass-shadow-liquid);
+}
+
+.glass-drawer[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+  box-shadow: 0 6px 20px 0 var(--glass-shadow-matte);
+}
+
+.glass-drawer-header {
+  padding: 1.25rem;
+  border-bottom: var(--glass-border-width) solid var(--glass-border-frosted);
+}
+
+.glass-drawer-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--glass-text);
+}
+
+.glass-drawer-content {
+  padding: 1.25rem;
+  flex: 1;
+  overflow-y: auto;
+  color: var(--glass-text);
+}

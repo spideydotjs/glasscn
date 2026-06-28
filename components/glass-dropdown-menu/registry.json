@@ -1,0 +1,17 @@
+{
+  "name": "glass-dropdown-menu",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-dropdown-menu/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-dropdown-menu/styles.css",
+      "type": "style"
+    }
+  ]
+}

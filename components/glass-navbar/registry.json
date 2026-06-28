@@ -1,0 +1,17 @@
+{
+  "name": "glass-navbar",
+  "type": "registry:ui",
+  "dependencies": [
+    "react"
+  ],
+  "files": [
+    {
+      "path": "components/glass-navbar/index.tsx",
+      "type": "component"
+    },
+    {
+      "path": "components/glass-navbar/styles.css",
+      "type": "style"
+    }
+  ]
+}

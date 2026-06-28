@@ -1,0 +1,109 @@
+.glass-toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--glass-font-sans);
+}
+
+.glass-toggle-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  color: var(--glass-text);
+  font-size: 0.95rem;
+}
+
+.glass-toggle-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.glass-toggle-track {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  display: inline-block;
+  position: relative;
+  transition: all var(--glass-speed-normal) ease;
+  border: var(--glass-border-width) solid transparent;
+  box-sizing: border-box;
+}
+
+.glass-toggle-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  transition: transform var(--glass-speed-normal) ease, background var(--glass-speed-normal) ease, box-shadow var(--glass-speed-normal) ease;
+  box-sizing: border-box;
+}
+
+.glass-toggle-input:checked ~ .glass-toggle-track .glass-toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* Glass Variants (Track) */
+.glass-toggle-track[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border-color: var(--glass-border-frosted);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track[data-glass="frosted"] {
+  background: var(--glass-primary);
+  border-color: var(--glass-primary);
+}
+
+.glass-toggle-track[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border-color: var(--glass-border-liquid);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track[data-glass="liquid"] {
+  background: var(--glass-text);
+  border-color: var(--glass-text);
+}
+
+.glass-toggle-track[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border-color: var(--glass-border-matte);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track[data-glass="matte"] {
+  background: var(--glass-text);
+  border-color: var(--glass-text);
+}
+
+/* Thumb details per variant */
+.glass-toggle-thumb[data-glass="frosted"] {
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track .glass-toggle-thumb[data-glass="frosted"] {
+  background: #ffffff;
+}
+
+.glass-toggle-thumb[data-glass="liquid"] {
+  background: var(--glass-text);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track .glass-toggle-thumb[data-glass="liquid"] {
+  background: var(--glass-bg-matte);
+}
+
+.glass-toggle-thumb[data-glass="matte"] {
+  background: var(--glass-text);
+}
+.glass-toggle-input:checked ~ .glass-toggle-track .glass-toggle-thumb[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+}
