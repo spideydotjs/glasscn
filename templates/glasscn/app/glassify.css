@@ -1,0 +1,8 @@
+@import "./components/glassify/tokens.css";
+@import "./components/glassify/animations.css";
+
+@import "./components/glassify/glass-button/styles.css";
+@import "./components/glassify/glass-card/styles.css";
+@import "./components/glassify/glass-navbar/styles.css";
+@import "./components/glassify/glass-panel/styles.css";
+@import "./components/glassify/glass-tabs/styles.css";

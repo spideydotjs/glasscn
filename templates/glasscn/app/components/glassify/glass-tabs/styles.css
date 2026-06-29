@@ -1,0 +1,67 @@
+.glass-tabs-container {
+  display: inline-flex;
+  padding: 0.25rem;
+  border-radius: var(--glass-radius);
+  font-family: var(--glass-font-sans);
+  box-sizing: border-box;
+}
+
+/* Glass Variants (Container) */
+.glass-tabs-container[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-frosted);
+}
+
+.glass-tabs-container[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  background-size: 200% 200%;
+  animation: glass-liquid-shift var(--glass-speed-liquid) ease infinite;
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: var(--glass-border-width) solid var(--glass-border-liquid);
+}
+
+.glass-tabs-container[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  border: var(--glass-border-width) solid var(--glass-border-matte);
+}
+
+.glass-tabs-list {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.glass-tabs-trigger {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: calc(var(--glass-radius) - 2px);
+  border: none;
+  background: transparent;
+  color: var(--glass-text);
+  cursor: pointer;
+  transition: all var(--glass-speed-normal) ease;
+  outline: none;
+}
+
+.glass-tabs-trigger:hover {
+  opacity: 0.85;
+}
+
+/* Active State Styling */
+.glass-tabs-container[data-glass="frosted"] .glass-tabs-trigger-active {
+  background: var(--glass-primary-hover);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.glass-tabs-container[data-glass="liquid"] .glass-tabs-trigger-active {
+  background: var(--glass-text);
+  color: var(--glass-text-inverse);
+}
+
+.glass-tabs-container[data-glass="matte"] .glass-tabs-trigger-active {
+  background: var(--glass-text);
+  color: var(--glass-text-inverse);
+}

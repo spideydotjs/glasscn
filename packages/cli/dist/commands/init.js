@@ -13,13 +13,50 @@ export const initCommand = new Command()
             console.log('Already initialized: glasscn.json exists.');
             return;
         }
-        console.log('Initializing glasscn...');
-        // Default configuration
+        console.log('Detecting project structure...');
+        // 1. Detect src/ directory
+        const hasSrc = await fs.pathExists(path.join(process.cwd(), 'src'));
+        const basePrefix = hasSrc ? 'src/' : '';
+        // 2. Detect TS vs JS
+        const hasTsconfig = await fs.pathExists(path.join(process.cwd(), 'tsconfig.json'));
+        const utilsExt = hasTsconfig ? 'ts' : 'js';
+        // 3. Detect Next.js and App Router vs Pages Router
+        const packageJsonPath = path.join(process.cwd(), 'package.json');
+        let isNext = false;
+        if (await fs.pathExists(packageJsonPath)) {
+            const pkg = await fs.readJSON(packageJsonPath);
+            isNext = !!(pkg.dependencies?.next || pkg.devDependencies?.next);
+        }
+        const hasAppRouter = await fs.pathExists(path.join(process.cwd(), basePrefix + 'app'));
+        const hasPagesRouter = await fs.pathExists(path.join(process.cwd(), basePrefix + 'pages'));
+        // Determine default paths
+        let stylePath = `${basePrefix}glassify.css`;
+        let componentsPath = `${basePrefix}components/glassify`;
+        let utilsPath = `${basePrefix}lib/utils.${utilsExt}`;
+        let instructions = '';
+        if (isNext) {
+            if (hasAppRouter) {
+                stylePath = `${basePrefix}app/glassify.css`;
+                instructions = `To complete setup, import './glassify.css' in ${basePrefix}app/layout.${hasTsconfig ? 'tsx' : 'js'}`;
+            }
+            else if (hasPagesRouter) {
+                stylePath = `${basePrefix}pages/glassify.css`;
+                instructions = `To complete setup, import './glassify.css' in ${basePrefix}pages/_app.${hasTsconfig ? 'tsx' : 'js'}`;
+            }
+            else {
+                instructions = `To complete setup, import internal glassify.css stylesheet in your root layout/app file.`;
+            }
+        }
+        else {
+            const mainEntry = hasTsconfig ? 'main.tsx' : 'main.jsx';
+            instructions = `To complete setup, import './glassify.css' in ${basePrefix}${mainEntry} or ${basePrefix}index.${hasTsconfig ? 'tsx' : 'js'}`;
+        }
         const defaultConfig = {
-            style: 'src/glassify.css',
-            components: 'src/components/glassify',
-            utils: 'src/lib/utils.ts'
+            style: stylePath,
+            components: componentsPath,
+            utils: utilsPath
         };
+        console.log('Initializing glasscn...');
         // Write config file
         await fs.writeJSON(configPath, defaultConfig, { spaces: 2 });
         console.log('Created glasscn.json');
@@ -42,7 +79,10 @@ export const initCommand = new Command()
         const utilsRes = await fetch(`${REGISTRY_URL}/lib/utils.ts`);
         if (!utilsRes.ok)
             throw new Error('Failed to fetch utils.ts');
-        const utilsContent = await utilsRes.text();
+        let utilsContent = await utilsRes.text();
+        // If they are using pure javascript, we can strip basic typescript types if needed or just rename it.
+        // Usually next.js / react setups with javascript support modern syntax, but utils.ts is simple.
+        // Let's write to target utils.ts or utils.js
         await fs.writeFile(defaultConfig.utils, utilsContent);
         // Create main glassify.css importing tokens and animations dynamically
         const styleDir = path.dirname(defaultConfig.style);
@@ -57,6 +97,9 @@ export const initCommand = new Command()
         console.log(`- Tokens: ${path.join(defaultConfig.components, 'tokens.css')}`);
         console.log(`- Animations: ${path.join(defaultConfig.components, 'animations.css')}`);
         console.log(`- Utils: ${defaultConfig.utils}`);
+        if (instructions) {
+            console.log(`\n👉 ${instructions}`);
+        }
     }
     catch (error) {
         console.error('Initialization failed:', error.message);
