@@ -1,23 +1,27 @@
 import React from 'react';
 import Link from 'next/link';
-import { Sparkles, Terminal, Code2, Cpu, Flame, ChevronRight, BookOpen } from 'lucide-react';
+import { Sparkles, Terminal, Code2, Cpu, ChevronRight, BookOpen } from 'lucide-react';
 import { Navbar } from './components/Navbar';
 import { GlassPanel } from './components/glassify/glass-panel';
 import { GlassCard } from './components/glassify/glass-card';
 import { GlassButton } from './components/glassify/glass-button';
+import DotGrid from './components/DotGrid';
 import { getAllPosts } from './lib/blog';
 
 export default async function Home() {
   const blogs = getAllPosts().slice(0, 2);
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans">
+    <div className="relative min-h-screen flex flex-col font-sans overflow-x-hidden">
       {/* Background Mesh Gradients */}
       <div className="glass-mesh-bg">
         <div className="glass-mesh-orb w-[500px] h-[500px] bg-indigo-500/10 top-[-100px] left-[-100px]" />
         <div className="glass-mesh-orb w-[600px] h-[600px] bg-purple-500/10 bottom-[-100px] right-[-100px]" />
         <div className="glass-mesh-orb w-[400px] h-[400px] bg-pink-500/5 top-[30%] left-[45%]" />
       </div>
+
+      {/* Interactive Dot Grid Background from sonusid.in */}
+      <DotGrid />
 
       <Navbar />
 
@@ -43,13 +47,13 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row gap-4 mt-4">
             <Link href="/blog">
-              <GlassButton glass="liquid" variant="solid" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5">
+              <GlassButton glass="matte" variant="solid" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5">
                 <BookOpen className="w-4 h-4" />
                 Read the Blog
               </GlassButton>
             </Link>
             <a href="https://glasscn.sonusid.in" target="_blank" rel="noopener noreferrer">
-              <GlassButton glass="frosted" variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5">
+              <GlassButton glass="matte" variant="outline" className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-3.5">
                 Explore Components
                 <ChevronRight className="w-4 h-4" />
               </GlassButton>
@@ -60,7 +64,7 @@ export default async function Home() {
         {/* Live Glass Panel Showcase */}
         <div className="w-full max-w-5xl">
           <GlassPanel
-            glass="frosted"
+            glass="matte"
             title="Interactive Preview"
             description="Toggle design presets below to see glassmorphism refract in real-time."
             className="w-full border border-white/[0.05] dark:border-black/[0.1] shadow-2xl p-8 md:p-12 flex flex-col md:flex-row gap-8 items-center"
@@ -71,25 +75,25 @@ export default async function Home() {
                 Every component is copy-pasted into your code directory. Adjust margins, override CSS variables, and customize every visual aspect directly in your own code editor.
               </p>
               <div className="flex gap-3 mt-2">
-                <GlassButton glass="liquid" variant="solid" size="sm">Liquid Button</GlassButton>
-                <GlassButton glass="matte" variant="outline" size="sm">Matte Button</GlassButton>
+                <GlassButton glass="matte" variant="solid" size="sm">Matte Button</GlassButton>
+                <GlassButton glass="matte" variant="outline" size="sm">Outline Button</GlassButton>
               </div>
             </div>
             <div className="w-full md:w-80 shrink-0">
               <GlassCard
-                glass="liquid"
+                glass="matte"
                 header={<div className="font-bold text-sm tracking-wide uppercase">glass-card</div>}
                 footer={
                   <div className="flex justify-between items-center w-full">
                     <span className="text-[10px] font-mono text-zinc-500">v0.1.0</span>
-                    <GlassButton glass="frosted" variant="solid" size="sm">Action</GlassButton>
+                    <GlassButton glass="matte" variant="solid" size="sm">Action</GlassButton>
                   </div>
                 }
                 className="w-full border border-white/10 p-6 flex flex-col gap-4 text-left"
               >
-                <h4 className="text-base font-semibold">Crystal Clear</h4>
+                <h4 className="text-base font-semibold">Matte Preset</h4>
                 <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">
-                  Liquid glass utilizes low blur and saturation overlays to maximize transparency and light.
+                  Matte glass utilizes heavy backdrop-blur and deep saturation overlays to maximize structural contrast.
                 </p>
               </GlassCard>
             </div>
@@ -98,7 +102,7 @@ export default async function Home() {
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-5xl">
-          <GlassCard glass="liquid" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
+          <GlassCard glass="matte" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
             <div className="w-10 h-10 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-500 shrink-0">
               <Terminal className="w-5 h-5" />
             </div>
@@ -108,7 +112,7 @@ export default async function Home() {
             </p>
           </GlassCard>
 
-          <GlassCard glass="liquid" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
+          <GlassCard glass="matte" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
             <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-500 shrink-0">
               <Code2 className="w-5 h-5" />
             </div>
@@ -118,7 +122,7 @@ export default async function Home() {
             </p>
           </GlassCard>
 
-          <GlassCard glass="liquid" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
+          <GlassCard glass="matte" className="p-8 border border-white/5 flex flex-col gap-4 text-left">
             <div className="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-500 shrink-0">
               <Cpu className="w-5 h-5" />
             </div>
@@ -146,7 +150,7 @@ export default async function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {blogs.map((blog) => (
                 <Link href={`/blog/${blog.slug}`} key={blog.slug}>
-                  <GlassCard glass="frosted" className="p-6 border border-white/5 hover:border-indigo-500/30 transition-all duration-300 flex flex-col gap-3 text-left group">
+                  <GlassCard glass="matte" className="p-6 border border-white/5 hover:border-indigo-500/30 transition-all duration-300 flex flex-col gap-3 text-left group">
                     <span className="text-[10px] font-mono text-zinc-500">{blog.date}</span>
                     <h3 className="text-lg font-bold tracking-tight group-hover:text-indigo-500 transition-colors">{blog.title}</h3>
                     <p className="text-xs text-slate-600 dark:text-zinc-400 leading-relaxed">{blog.excerpt}</p>

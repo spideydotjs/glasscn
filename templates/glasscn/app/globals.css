@@ -42,3 +42,14 @@ body {
 .dark .glass-mesh-orb {
   opacity: 0.18;
 }
+
+@keyframes smoothPulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scaleY(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.05);
+  }
+}

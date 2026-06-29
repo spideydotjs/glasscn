@@ -21,7 +21,7 @@ export function Navbar() {
 
   return (
     <GlassNavbar
-      glass="liquid"
+      glass="matte"
       className="sticky top-0 z-50 px-4 md:px-8 py-3 border-b border-white/[0.05] dark:border-black/[0.1]"
       brand={
         <Link href="/" className="flex items-center gap-2 font-bold tracking-wider text-xl group">

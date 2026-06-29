@@ -3,18 +3,22 @@ import Link from 'next/link';
 import { Calendar, User, ChevronRight } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { GlassCard } from '../components/glassify/glass-card';
+import DotGrid from '../components/DotGrid';
 import { getAllPosts } from '../lib/blog';
 
 export default async function BlogIndex() {
   const posts = getAllPosts();
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans">
+    <div className="relative min-h-screen flex flex-col font-sans overflow-x-hidden">
       {/* Background Mesh Gradients */}
       <div className="glass-mesh-bg">
         <div className="glass-mesh-orb w-[600px] h-[600px] bg-indigo-500/10 top-[-100px] right-[-100px]" />
         <div className="glass-mesh-orb w-[500px] h-[500px] bg-purple-500/10 bottom-[-100px] left-[-100px]" />
       </div>
+
+      {/* Interactive Dot Grid Background from sonusid.in */}
+      <DotGrid />
 
       <Navbar />
 
@@ -41,7 +45,7 @@ export default async function BlogIndex() {
             {posts.map((post) => (
               <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
                 <GlassCard
-                  glass="frosted"
+                  glass="matte"
                   className="p-6 md:p-8 border border-white/5 hover:border-indigo-500/30 transition-all duration-300 flex flex-col gap-4 text-left"
                 >
                   <div className="flex items-center gap-4 text-[10px] font-mono text-zinc-500">

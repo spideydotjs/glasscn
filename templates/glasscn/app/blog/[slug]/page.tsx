@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Calendar, User, ArrowLeft } from 'lucide-react';
 import { Navbar } from '../../components/Navbar';
 import { GlassPanel } from '../../components/glassify/glass-panel';
+import DotGrid from '../../components/DotGrid';
 import { getPostBySlug } from '../../lib/blog';
 import { MarkdownRenderer } from '../../components/MarkdownRenderer';
 
@@ -16,12 +17,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans">
+    <div className="relative min-h-screen flex flex-col font-sans overflow-x-hidden">
       {/* Background Mesh Gradients */}
       <div className="glass-mesh-bg">
         <div className="glass-mesh-orb w-[500px] h-[500px] bg-indigo-500/10 top-[-100px] left-[-100px]" />
         <div className="glass-mesh-orb w-[600px] h-[600px] bg-purple-500/10 bottom-[-100px] right-[-100px]" />
       </div>
+
+      {/* Interactive Dot Grid Background from sonusid.in */}
+      <DotGrid />
 
       <Navbar />
 
@@ -33,7 +37,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
         <article className="flex flex-col gap-8">
           <GlassPanel
-            glass="frosted"
+            glass="matte"
             title={post.title}
             description={post.excerpt}
             className="p-8 md:p-12 border border-white/5 flex flex-col gap-6 text-left"
