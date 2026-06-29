@@ -1,6 +1,7 @@
 {
   "name": "glassify-monorepo",
   "private": true,
+  "author": "firojsiddiquie <firojsiddiquie.dev@gmail.com>",
   "workspaces": [
     "packages/*"
   ],

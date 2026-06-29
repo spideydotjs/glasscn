@@ -82,3 +82,15 @@ Feel free to open issues or pull requests. When writing new glassmorphic compone
 2. Define a clean React template.
 3. Export properties conforming to `frosted | liquid | matte` presets.
 4. Update the root `registry.json` and the `.tsx` glob imports in the preview application.
+
+---
+
+## 👤 Author
+
+Developed and maintained by **firojsiddiquie** ([firojsiddiquie.dev@gmail.com](mailto:firojsiddiquie.dev@gmail.com)).
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
+

@@ -2,6 +2,7 @@
   "name": "preview-app",
   "version": "0.1.0",
   "private": true,
+  "author": "firojsiddiquie <firojsiddiquie.dev@gmail.com>",
   "type": "module",
   "scripts": {
     "dev": "vite",
