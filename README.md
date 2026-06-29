@@ -36,10 +36,10 @@ Open `http://localhost:5173` to explore components side-by-side with their imple
 
 ```bash
 # Initialize layout configs
-npx glassify init
+npx @firojsiddiquie/glassify init
 
 # Download specific glass-component code to your local directory
-npx glassify add glass-button
+npx @firojsiddiquie/glassify add glass-button
 ```
 
 ---

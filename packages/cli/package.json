@@ -1,11 +1,11 @@
 {
-  "name": "glassify",
+  "name": "@firojsiddiquie/glassify",
   "version": "0.1.0",
   "description": "Glassify CLI tool",
   "author": "firojsiddiquie <firojsiddiquie.dev@gmail.com>",
   "main": "dist/index.js",
   "bin": {
-    "glassify": "./dist/index.js"
+    "glassify": "dist/index.js"
   },
   "type": "module",
   "scripts": {
