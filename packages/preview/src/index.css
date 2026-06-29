@@ -902,3 +902,101 @@ body[data-theme="light"] .preview-grid-bg { opacity: 0.14; }
   color: var(--glass-text-muted);
   opacity: 0.8;
 }
+
+/* ============================================
+   RESPONSIVE LAYOUT & DRAWER SYSTEM
+   ============================================ */
+.app-sidebar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border-frosted);
+  background: var(--glass-primary);
+  color: var(--glass-text);
+  cursor: pointer;
+  margin-right: 0.75rem;
+  padding: 0;
+  transition: all 0.18s ease;
+}
+
+.app-sidebar-toggle:hover {
+  background: var(--glass-primary-hover);
+}
+
+.app-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 40;
+}
+
+/* Tablet & Mobile Styles */
+@media (max-width: 1023px) {
+  body {
+    overflow: auto; /* Allow outer page scrolling on mobile */
+  }
+
+  .preview-layout {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+  }
+
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 20px 0 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .app-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .app-main {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    width: 100%;
+  }
+
+  .app-sidebar-toggle {
+    display: flex;
+  }
+
+  .app-content.split-layout {
+    height: auto;
+    overflow: visible;
+    padding: 1rem 1rem 3rem 1rem;
+  }
+
+  .layout-pane-preview,
+  .layout-pane-code {
+    overflow: visible;
+    height: auto;
+  }
+
+  .app-showcase {
+    min-height: 280px;
+    padding: 1.5rem;
+  }
+
+  .code-viewer-shell {
+    height: auto;
+  }
+
+  .code-pane-body {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}

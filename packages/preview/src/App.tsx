@@ -6,7 +6,7 @@ import {
   MessageSquareWarning, Bell, AlertCircle, AlertTriangle, Info, CheckCircle2, XCircle, Tag, BarChart2,
   NotebookTabs, Link, ChevronLeft, ChevronDown, UserCircle, Table,
   ListCollapse, CalendarDays, Sun, Moon, Layers,
-  Copy, Check
+  Copy, Check, Menu, X
 } from 'lucide-react';
 
 const componentCodes = (import.meta as any).glob('../../../components/**/*.tsx', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
@@ -705,6 +705,7 @@ export default function App() {
   // Code preview & copy states
   const [codeTab, setCodeTab] = useState<'cli' | 'tsx' | 'css' | 'usage'>('cli');
   const [copiedState, setCopiedState] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
 
   const tsxKey = `../../../components/${selectedComp}/index.tsx`;
   const cssKey = `../../../components/${selectedComp}/styles.css`;
@@ -1110,8 +1111,13 @@ export default function App() {
         ))}
       </div>
 
+      {/* Sidebar Backdrop Overlay */}
+      {isSidebarOpen && (
+        <div className="app-sidebar-backdrop" onClick={() => setIsSidebarOpen(false)} />
+      )}
+
       {/* ── Sidebar ── */}
-      <aside className="app-sidebar" data-glass={glassStyle}>
+      <aside className={`app-sidebar ${isSidebarOpen ? 'open' : ''}`} data-glass={glassStyle}>
         {/* Logo */}
         <div className="app-sidebar-logo">
           <div className="app-logo-icon">
@@ -1141,7 +1147,10 @@ export default function App() {
                 <button
                   key={c.id}
                   className={`app-nav-item ${selectedComp === c.id ? 'active' : ''}`}
-                  onClick={() => setSelectedComp(c.id)}
+                  onClick={() => {
+                    setSelectedComp(c.id);
+                    setIsSidebarOpen(false);
+                  }}
                 >
                   <span className="app-nav-icon">{c.icon}</span>
                   {c.name}
@@ -1165,6 +1174,13 @@ export default function App() {
         {/* Top bar */}
         <header className="app-topbar" data-glass={glassStyle}>
           <div className="app-topbar-left">
+            <button 
+              className="app-sidebar-toggle" 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {isSidebarOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
             <span className="app-topbar-icon">{currentComp?.icon}</span>
             <div>
               <h1 className="app-topbar-title">{currentComp?.name || 'Preview'}</h1>
