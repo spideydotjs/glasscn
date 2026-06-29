@@ -5,8 +5,600 @@ import {
   CircleDot, SlidersHorizontal, LayoutTemplate,
   MessageSquareWarning, Bell, AlertCircle, AlertTriangle, Info, CheckCircle2, XCircle, Tag, BarChart2,
   NotebookTabs, Link, ChevronLeft, ChevronDown, UserCircle, Table,
-  ListCollapse, CalendarDays, Sun, Moon, Layers
+  ListCollapse, CalendarDays, Sun, Moon, Layers,
+  Copy, Check
 } from 'lucide-react';
+
+const componentCodes = (import.meta as any).glob('../../../components/**/*.tsx', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const componentStyles = (import.meta as any).glob('../../../components/**/*.css', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+
+// Simple syntax highlighter
+function highlightCode(code: string, lang: 'tsx' | 'css' | 'bash') {
+  let html = code
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+
+  const tokens: string[] = [];
+  const pushToken = (content: string, className: string) => {
+    tokens.push(`<span class="${className}">${content}</span>`);
+    return `___TOKEN_${tokens.length - 1}___`;
+  };
+
+  if (lang === 'tsx') {
+    // Comments
+    html = html.replace(/(\/\/.*)/g, (_, comment) => pushToken(comment, 'code-comment'));
+    html = html.replace(/(\/\*[\s\S]*?\*\/)/g, (_, comment) => pushToken(comment, 'code-comment'));
+    // Strings
+    html = html.replace(/(["`])(.*?)\1/g, (_, quote, str) => pushToken(quote + str + quote, 'code-string'));
+    html = html.replace(/'(.*?)'/g, (_, str) => pushToken("'" + str + "'", 'code-string'));
+    // Keywords
+    html = html.replace(/\b(import|export|const|let|var|return|function|interface|extends|type|default|from|false|true|null|undefined|as|typeof|instanceof|switch|case|break)\b/g, (match) => pushToken(match, 'code-keyword'));
+    // React Components / Class Names
+    html = html.replace(/\b([A-Z][a-zA-Z0-9_]*)\b/g, (match) => pushToken(match, 'code-type'));
+    // Functions
+    html = html.replace(/\b([a-zA-Z0-9_]+)(?=\s*\()/g, (match) => pushToken(match, 'code-function'));
+  } else if (lang === 'css') {
+    // Comments
+    html = html.replace(/(\/\*[\s\S]*?\*\/)/g, (_, comment) => pushToken(comment, 'code-comment'));
+    // Class names & selectors
+    html = html.replace(/(\.[a-zA-Z0-9_-]+)/g, (match) => pushToken(match, 'code-class'));
+    // CSS Variables
+    html = html.replace(/(--[a-zA-Z0-9_-]+)/g, (match) => pushToken(match, 'code-variable'));
+    // Properties
+    html = html.replace(/\b([a-zA-Z-]+)\s*:/g, (_, prop) => pushToken(prop, 'code-property') + ':');
+  } else if (lang === 'bash') {
+    // Keywords / Commands
+    html = html.replace(/\b(npx|npm|git|add|init)\b/g, (match) => pushToken(match, 'code-keyword'));
+    // Strings
+    html = html.replace(/(["`])(.*?)\1/g, (_, quote, str) => pushToken(quote + str + quote, 'code-string'));
+    html = html.replace(/'(.*?)'/g, (_, str) => pushToken("'" + str + "'", 'code-string'));
+  }
+
+  // Restore tokens in reverse order
+  for (let i = tokens.length - 1; i >= 0; i--) {
+    html = html.replace(`___TOKEN_${i}___`, tokens[i]);
+  }
+
+  return html;
+}
+
+// Generate dynamic usage code snippets based on component controls state
+function getUsageCode(
+  componentId: string,
+  glassStyle: string,
+  state: {
+    buttonVariant: string;
+    buttonSize: string;
+    inputValue: string;
+    inputError: string;
+    checkboxChecked: boolean;
+    radioValue: string;
+    toggleChecked: boolean;
+    sliderValue: number;
+    alertVariant: string;
+    badgeVariant: string;
+    progressValue: number;
+    activeTab: string;
+    currentPage: number;
+    drawerPos: string;
+  }
+): string {
+  switch (componentId) {
+    case 'glass-card':
+      return `import { GlassCard } from '@/components/glass-card';
+import { GlassButton } from '@/components/glass-button';
+
+export default function CardExample() {
+  return (
+    <GlassCard
+      glass="${glassStyle}"
+      header={<div>Glass Card Header</div>}
+      footer={
+        <>
+          <GlassButton glass="${glassStyle}" size="sm">Cancel</GlassButton>
+          <GlassButton glass="${glassStyle}" size="sm" variant="outline">Action</GlassButton>
+        </>
+      }
+    >
+      <p style={{ margin: 0 }}>
+        A customizable card component with glassmorphic backdrop-filter properties.
+      </p>
+    </GlassCard>
+  );
+}`;
+
+    case 'glass-panel':
+      return `import { GlassPanel } from '@/components/glass-panel';
+
+export default function PanelExample() {
+  return (
+    <GlassPanel 
+      glass="${glassStyle}" 
+      title="Dashboard Panel" 
+      description="Explore glass panel styling variants"
+    >
+      <p style={{ margin: 0 }}>
+        Glass panels serve as primary layout containers with fluid borders and rounded shapes.
+      </p>
+    </GlassPanel>
+  );
+}`;
+
+    case 'glass-navbar':
+      return `import { GlassNavbar } from '@/components/glass-navbar';
+import { GlassButton } from '@/components/glass-button';
+
+export default function NavbarExample() {
+  return (
+    <GlassNavbar
+      glass="${glassStyle}"
+      brand={<span style={{ fontWeight: 800, letterSpacing: '0.05em' }}>GLASSIFY</span>}
+      links={
+        <>
+          <a href="#home">Home</a>
+          <a href="#docs">Docs</a>
+          <a href="#about">About</a>
+        </>
+      }
+      actions={<GlassButton glass="${glassStyle}" size="sm">Get Started</GlassButton>}
+    />
+  );
+}`;
+
+    case 'glass-sidebar':
+      return `import { GlassSidebar } from '@/components/glass-sidebar';
+
+export default function SidebarExample() {
+  return (
+    <div style={{ display: 'flex', height: '340px', width: '100%' }}>
+      <GlassSidebar
+        glass="${glassStyle}"
+        header={<div style={{ fontWeight: 800, fontSize: '1rem' }}>Glassify Portal</div>}
+        footer={<span style={{ fontSize: '0.75rem', opacity: 0.5 }}>v0.1.0-alpha</span>}
+      >
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
+          {['Dashboard', 'Analytics', 'Components', 'Settings'].map((item) => (
+            <a key={item} href="#" style={{ color: 'inherit', textDecoration: 'none', padding: '0.5rem 0.75rem', borderRadius: '6px', background: 'var(--glass-primary)', fontSize: '0.875rem' }}>{item}</a>
+          ))}
+        </div>
+      </GlassSidebar>
+    </div>
+  );
+}`;
+
+    case 'glass-drawer':
+      return `import { useState } from 'react';
+import { GlassDrawer } from '@/components/glass-drawer';
+import { GlassButton } from '@/components/glass-button';
+
+export default function DrawerExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <GlassButton glass="${glassStyle}" onClick={() => setIsOpen(true)}>
+        Open Drawer
+      </GlassButton>
+      
+      <GlassDrawer 
+        glass="${glassStyle}" 
+        position="${state.drawerPos}" 
+        isOpen={isOpen} 
+        title="${state.drawerPos.toUpperCase()} DRAWER"
+      >
+        <p>Slide-in glass drawer panel component.</p>
+        <GlassButton glass="${glassStyle}" size="sm" onClick={() => setIsOpen(false)}>
+          Dismiss
+        </GlassButton>
+      </GlassDrawer>
+    </>
+  );
+}`;
+
+    case 'glass-button':
+      return `import { GlassButton } from '@/components/glass-button';
+
+export default function ButtonExample() {
+  return (
+    <GlassButton 
+      glass="${glassStyle}" 
+      variant="${state.buttonVariant}" 
+      size="${state.buttonSize}"
+    >
+      Click Me
+    </GlassButton>
+  );
+}`;
+
+    case 'glass-input':
+      return `import { useState } from 'react';
+import { GlassInput } from '@/components/glass-input';
+
+export default function InputExample() {
+  const [value, setValue] = useState('${state.inputValue}');
+
+  return (
+    <GlassInput 
+      glass="${glassStyle}" 
+      label="Email Address" 
+      placeholder="you@glassify.dev" 
+      value={value} 
+      onChange={(e) => setValue(e.target.value)} 
+      error="${state.inputError}"
+    />
+  );
+}`;
+
+    case 'glass-textarea':
+      return `import { GlassTextarea } from '@/components/glass-textarea';
+
+export default function TextareaExample() {
+  return (
+    <GlassTextarea 
+      glass="${glassStyle}" 
+      label="Project Notes" 
+      placeholder="Type your notes here..." 
+      rows={4} 
+    />
+  );
+}`;
+
+    case 'glass-select':
+      return `import { GlassSelect } from '@/components/glass-select';
+
+export default function SelectExample() {
+  return (
+    <GlassSelect 
+      glass="${glassStyle}" 
+      label="Glass Style Variant" 
+      options={[
+        { label: 'Frosted — Classic blur', value: 'frosted' },
+        { label: 'Liquid — Crystal clear', value: 'liquid' },
+        { label: 'Matte — Heavy satin', value: 'matte' },
+      ]} 
+    />
+  );
+}`;
+
+    case 'glass-checkbox':
+      return `import { useState } from 'react';
+import { GlassCheckbox } from '@/components/glass-checkbox';
+
+export default function CheckboxExample() {
+  const [checked, setChecked] = useState(${state.checkboxChecked});
+
+  return (
+    <GlassCheckbox 
+      glass="${glassStyle}" 
+      label="Enable liquid glow reflections on hover" 
+      checked={checked} 
+      onChange={(e) => setChecked(e.target.checked)} 
+    />
+  );
+}`;
+
+    case 'glass-radio':
+      return `import { useState } from 'react';
+import { GlassRadio } from '@/components/glass-radio';
+
+export default function RadioExample() {
+  const [value, setValue] = useState('${state.radioValue}');
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <GlassRadio 
+        glass="${glassStyle}" 
+        label="Frosted Glass" 
+        name="radio-group" 
+        checked={value === 'one'} 
+        onChange={() => setValue('one')} 
+      />
+      <GlassRadio 
+        glass="${glassStyle}" 
+        label="Liquid Glass" 
+        name="radio-group" 
+        checked={value === 'two'} 
+        onChange={() => setValue('two')} 
+      />
+    </div>
+  );
+}`;
+
+    case 'glass-toggle':
+      return `import { useState } from 'react';
+import { GlassToggle } from '@/components/glass-toggle';
+
+export default function ToggleExample() {
+  const [checked, setChecked] = useState(${state.toggleChecked});
+
+  return (
+    <GlassToggle 
+      glass="${glassStyle}" 
+      label="Enable experimental liquid mode" 
+      checked={checked} 
+      onChange={(e) => setChecked(e.target.checked)} 
+    />
+  );
+}`;
+
+    case 'glass-slider':
+      return `import { useState } from 'react';
+import { GlassSlider } from '@/components/glass-slider';
+
+export default function SliderExample() {
+  const [value, setValue] = useState(${state.sliderValue});
+
+  return (
+    <GlassSlider 
+      glass="${glassStyle}" 
+      label={\`Blur Intensity: \${value}px\`} 
+      min="0" 
+      max="100" 
+      value={value} 
+      onChange={(e) => setValue(Number(e.target.value))} 
+    />
+  );
+}`;
+
+    case 'glass-modal':
+      return `import { useState } from 'react';
+import { GlassModal } from '@/components/glass-modal';
+import { GlassButton } from '@/components/glass-button';
+
+export default function ModalExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <GlassButton glass="${glassStyle}" onClick={() => setIsOpen(true)}>
+        Launch Modal
+      </GlassButton>
+      
+      <GlassModal 
+        glass="${glassStyle}" 
+        isOpen={isOpen} 
+        title="System Notification" 
+        onClose={() => setIsOpen(false)}
+        footer={
+          <>
+            <GlassButton glass="${glassStyle}" size="sm" onClick={() => setIsOpen(false)}>Close</GlassButton>
+            <GlassButton glass="${glassStyle}" size="sm" variant="outline">Confirm</GlassButton>
+          </>
+        }
+      >
+        <p>This modal renders inside a backdrop blur overlay layer.</p>
+      </GlassModal>
+    </>
+  );
+}`;
+
+    case 'glass-tooltip':
+      return `import { GlassTooltip } from '@/components/glass-tooltip';
+
+export default function TooltipExample() {
+  return (
+    <div style={{ display: 'flex', gap: '2rem' }}>
+      <GlassTooltip glass="${glassStyle}" content="Top tooltip" position="top">
+        <span style={{ cursor: 'help', textDecoration: 'underline dashed' }}>Hover top</span>
+      </GlassTooltip>
+      <GlassTooltip glass="${glassStyle}" content="Bottom tooltip" position="bottom">
+        <span style={{ cursor: 'help', textDecoration: 'underline dashed' }}>Hover bottom</span>
+      </GlassTooltip>
+    </div>
+  );
+}`;
+
+    case 'glass-toast':
+      return `import { useState } from 'react';
+import { GlassToast } from '@/components/glass-toast';
+import { GlassButton } from '@/components/glass-button';
+
+export default function ToastExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <>
+      <GlassButton glass="${glassStyle}" onClick={() => setIsOpen(true)}>
+        Show Toast
+      </GlassButton>
+      
+      <GlassToast 
+        glass="${glassStyle}" 
+        isOpen={isOpen} 
+        title="Component Added" 
+        description="glass-button has been added to the registry." 
+        onClose={() => setIsOpen(false)} 
+      />
+    </>
+  );
+}`;
+
+    case 'glass-alert':
+      return `import { GlassAlert } from '@/components/glass-alert';
+
+export default function AlertExample() {
+  return (
+    <GlassAlert 
+      glass="${glassStyle}" 
+      variant="${state.alertVariant}" 
+      title="${state.alertVariant.charAt(0).toUpperCase() + state.alertVariant.slice(1)} Alert"
+      icon="${state.alertVariant === 'info' ? 'ℹ️' : state.alertVariant === 'warning' ? '⚠️' : state.alertVariant === 'error' ? '❌' : '✅'}"
+    >
+      Glass alerts support inline status signals with customizable severity.
+    </GlassAlert>
+  );
+}`;
+
+    case 'glass-badge':
+      return `import { GlassBadge } from '@/components/glass-badge';
+
+export default function BadgeExample() {
+  return (
+    <div style={{ display: 'flex', gap: '0.5rem' }}>
+      <GlassBadge glass="${glassStyle}" variant="${state.badgeVariant}">Active</GlassBadge>
+      <GlassBadge glass="${glassStyle}" variant="${state.badgeVariant}">Stable</GlassBadge>
+    </div>
+  );
+}`;
+
+    case 'glass-progress':
+      return `import { GlassProgress } from '@/components/glass-progress';
+
+export default function ProgressExample() {
+  return (
+    <GlassProgress glass="${glassStyle}" value={${state.progressValue}} />
+  );
+}`;
+
+    case 'glass-tabs':
+      return `import { useState } from 'react';
+import { GlassTabs } from '@/components/glass-tabs';
+
+export default function TabsExample() {
+  const [activeTab, setActiveTab] = useState('${state.activeTab}');
+
+  return (
+    <GlassTabs 
+      glass="${glassStyle}"
+      items={[
+        { id: 'tab-1', label: 'Overview' }, 
+        { id: 'tab-2', label: 'API Params' }, 
+        { id: 'tab-3', label: 'Registry' }
+      ]}
+      activeTab={activeTab}
+      onChangeTab={setActiveTab}
+    />
+  );
+}`;
+
+    case 'glass-breadcrumb':
+      return `import { GlassBreadcrumb } from '@/components/glass-breadcrumb';
+
+export default function BreadcrumbExample() {
+  return (
+    <GlassBreadcrumb glass="${glassStyle}">
+      <a href="#">src</a>
+      <a href="#">components</a>
+      <span>glass-button</span>
+    </GlassBreadcrumb>
+  );
+}`;
+
+    case 'glass-pagination':
+      return `import { useState } from 'react';
+import { GlassPagination } from '@/components/glass-pagination';
+
+export default function PaginationExample() {
+  const [page, setPage] = useState(${state.currentPage});
+
+  return (
+    <GlassPagination 
+      glass="${glassStyle}" 
+      currentPage={page} 
+      totalPages={5} 
+      onPageChange={setPage} 
+    />
+  );
+}`;
+
+    case 'glass-dropdown-menu':
+      return `import { useState } from 'react';
+import { GlassDropdownMenu } from '@/components/glass-dropdown-menu';
+import { GlassButton } from '@/components/glass-button';
+
+export default function DropdownExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <GlassDropdownMenu 
+      glass="${glassStyle}" 
+      isOpen={isOpen}
+      trigger={
+        <GlassButton glass="${glassStyle}" onClick={() => setIsOpen(!isOpen)}>
+          Open Menu
+        </GlassButton>
+      }
+      items={[
+        { label: 'Download Package', onClick: () => console.log('Downloading') },
+        { label: 'Copy Config', disabled: true },
+        { label: 'Reset State', onClick: () => console.log('Reset') },
+      ]}
+    />
+  );
+}`;
+
+    case 'glass-avatar':
+      return `import { GlassAvatar } from '@/components/glass-avatar';
+
+export default function AvatarExample() {
+  return (
+    <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+      <GlassAvatar 
+        glass="${glassStyle}" 
+        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100&q=80" 
+        fallback="JD" 
+        size="lg" 
+      />
+      <GlassAvatar glass="${glassStyle}" fallback="UN" size="md" />
+    </div>
+  );
+}`;
+
+    case 'glass-table':
+      return `import { GlassTable } from '@/components/glass-table';
+import { GlassBadge } from '@/components/glass-badge';
+
+export default function TableExample() {
+  return (
+    <GlassTable glass="${glassStyle}" headers={['Component', 'Status', 'Category']}>
+      <tr>
+        <td>glass-button</td>
+        <td><GlassBadge glass="${glassStyle}">Stable</GlassBadge></td>
+        <td>Inputs</td>
+      </tr>
+      <tr>
+        <td>glass-modal</td>
+        <td><GlassBadge glass="${glassStyle}">Stable</GlassBadge></td>
+        <td>Overlay</td>
+      </tr>
+    </GlassTable>
+  );
+}`;
+
+    case 'glass-accordion':
+      return `import { useState } from 'react';
+import { GlassAccordion } from '@/components/glass-accordion';
+
+export default function AccordionExample() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <GlassAccordion 
+      glass="${glassStyle}" 
+      title="Is glassmorphism responsive cross-device?" 
+      isOpen={isOpen} 
+      onToggle={() => setIsOpen(!isOpen)}
+    >
+      Yes — glass style variants rely on modern backdrop-filter and opacity channels.
+    </GlassAccordion>
+  );
+}`;
+
+    case 'glass-calendar':
+      return `import { GlassCalendar } from '@/components/glass-calendar';
+
+export default function CalendarExample() {
+  return (
+    <GlassCalendar glass="${glassStyle}" />
+  );
+}`;
+
+    default:
+      return '';
+  }
+}
+
 
 // Components
 import { GlassCard } from '@/components/glass-card';
@@ -109,6 +701,55 @@ export default function App() {
   const [accordionOpen, setAccordionOpen] = useState<boolean>(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [drawerPos, setDrawerPos] = useState<'left' | 'right' | 'top' | 'bottom'>('right');
+
+  // Code preview & copy states
+  const [codeTab, setCodeTab] = useState<'cli' | 'tsx' | 'css' | 'usage'>('cli');
+  const [copiedState, setCopiedState] = useState<string | null>(null);
+
+  const tsxKey = `../../../components/${selectedComp}/index.tsx`;
+  const cssKey = `../../../components/${selectedComp}/styles.css`;
+  const tsxCode = componentCodes[tsxKey] || '';
+  const cssCode = componentStyles[cssKey] || '';
+  const hasCss = !!cssCode;
+
+  const copyToClipboard = (text: string, id: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopiedState(id);
+      setTimeout(() => {
+        setCopiedState(null);
+      }, 2000);
+    });
+  };
+
+  const getActiveCodeText = () => {
+    switch (codeTab) {
+      case 'cli':
+        return `npx glassify add ${selectedComp}`;
+      case 'tsx':
+        return tsxCode;
+      case 'css':
+        return cssCode;
+      case 'usage':
+        return getUsageCode(selectedComp, glassStyle, {
+          buttonVariant,
+          buttonSize,
+          inputValue,
+          inputError,
+          checkboxChecked,
+          radioValue,
+          toggleChecked,
+          sliderValue,
+          alertVariant,
+          badgeVariant,
+          progressValue,
+          activeTab,
+          currentPage,
+          drawerPos
+        });
+      default:
+        return '';
+    }
+  };
 
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
@@ -537,9 +1178,91 @@ export default function App() {
         </header>
 
         {/* Content */}
-        <section className="app-content">
-          <div className="app-showcase" data-glass={glassStyle}>
-            {renderComponent()}
+        <section className="app-content split-layout">
+          {/* Left Pane: Interactive Showcase */}
+          <div className="layout-pane-preview">
+            <div className="app-showcase" data-glass={glassStyle}>
+              {renderComponent()}
+            </div>
+            <div className="showcase-info-help">
+              Use the sidebar style switcher to toggle frosted, liquid, and matte glass presets.
+            </div>
+          </div>
+
+          {/* Right Pane: Code Viewer */}
+          <div className="layout-pane-code">
+            <div className="code-viewer-shell" data-glass={glassStyle}>
+              {/* Sub tabs for files */}
+              <div className="code-subtabs">
+                <button
+                  className={`code-subtab-btn ${codeTab === 'cli' ? 'active' : ''}`}
+                  onClick={() => setCodeTab('cli')}
+                >
+                  CLI
+                </button>
+                <button
+                  className={`code-subtab-btn ${codeTab === 'tsx' ? 'active' : ''}`}
+                  onClick={() => setCodeTab('tsx')}
+                >
+                  index.tsx
+                </button>
+                {hasCss && (
+                  <button
+                    className={`code-subtab-btn ${codeTab === 'css' ? 'active' : ''}`}
+                    onClick={() => setCodeTab('css')}
+                  >
+                    styles.css
+                  </button>
+                )}
+                <button
+                  className={`code-subtab-btn ${codeTab === 'usage' ? 'active' : ''}`}
+                  onClick={() => setCodeTab('usage')}
+                >
+                  Usage
+                </button>
+              </div>
+
+              {/* Code viewer pane */}
+              <div className="code-pane-container">
+                <div className="code-pane-header">
+                  <span className="code-pane-filename">
+                    {codeTab === 'cli' && 'Terminal'}
+                    {codeTab === 'tsx' && `${selectedComp}/index.tsx`}
+                    {codeTab === 'css' && `${selectedComp}/styles.css`}
+                    {codeTab === 'usage' && 'ExampleUsage.tsx'}
+                  </span>
+                  <button
+                    className="code-copy-btn"
+                    onClick={() => copyToClipboard(getActiveCodeText(), codeTab)}
+                    aria-label="Copy code"
+                  >
+                    {copiedState === codeTab ? (
+                      <>
+                        <Check size={13} className="copy-btn-icon" />
+                        <span>Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={13} className="copy-btn-icon" />
+                        <span>Copy Code</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+                <div className="code-pane-body">
+                  <pre>
+                    <code
+                      dangerouslySetInnerHTML={{
+                        __html: highlightCode(
+                          getActiveCodeText(),
+                          codeTab === 'css' ? 'css' : codeTab === 'cli' ? 'bash' : 'tsx'
+                        )
+                      }}
+                    />
+                  </pre>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>

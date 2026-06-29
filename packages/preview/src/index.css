@@ -633,3 +633,272 @@ body[data-theme="light"] .preview-grid-bg { opacity: 0.14; }
   padding: 0.22rem 0.5rem;
   font-size: 0.66rem;
 }
+
+/* ============================================
+   SPLIT PREVIEW AND CODE VIEW LAYOUTS
+   ============================================ */
+.app-content.split-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Responsive splits on desktop */
+@media (min-width: 1024px) {
+  .app-content.split-layout {
+    flex-direction: row;
+    height: calc(100vh - 60px); /* Fill remaining height under topbar */
+    overflow: hidden;
+    padding: 1.5rem 2rem;
+  }
+
+  .layout-pane-preview {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+    height: 100%;
+  }
+
+  .layout-pane-code {
+    flex: 1.2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden; /* container doesn't scroll; inner code box does */
+  }
+
+  .app-content.split-layout .code-viewer-shell {
+    height: 100%;
+  }
+
+  .app-content.split-layout .code-pane-body {
+    max-height: none !important; /* let editor expand dynamically */
+    flex: 1;
+    overflow-y: auto;
+  }
+}
+
+.layout-pane-preview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.layout-pane-code {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Adjust App Showcase card for split layout */
+.app-content.split-layout .app-showcase {
+  width: 100%;
+  max-width: none; /* remove fixed width limit */
+  flex-grow: 1;
+  min-height: 380px; /* comfortable viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  box-sizing: border-box;
+}
+
+/* ============================================
+   CODE VIEWER SHELL & EDITOR CONTAINER
+   ============================================ */
+.code-viewer-shell {
+  width: 100%;
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.code-viewer-shell[data-glass="frosted"] {
+  background: var(--glass-bg-frosted);
+  backdrop-filter: var(--glass-filter-frosted);
+  -webkit-backdrop-filter: var(--glass-filter-frosted);
+  border: 1px solid var(--glass-border-frosted);
+}
+.code-viewer-shell[data-glass="liquid"] {
+  background: var(--glass-bg-liquid);
+  backdrop-filter: var(--glass-filter-liquid);
+  -webkit-backdrop-filter: var(--glass-filter-liquid);
+  border: 1px solid var(--glass-border-liquid);
+}
+.code-viewer-shell[data-glass="matte"] {
+  background: var(--glass-bg-matte);
+  backdrop-filter: var(--glass-filter-matte);
+  -webkit-backdrop-filter: var(--glass-filter-matte);
+  border: 1px solid var(--glass-border-matte);
+}
+
+/* Subtabs for code files */
+.code-subtabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid var(--glass-border-frosted);
+  padding: 0.4rem 0.75rem 0;
+  gap: 0.25rem;
+}
+
+.code-subtab-btn {
+  border: 1px solid transparent;
+  border-bottom: none;
+  background: transparent;
+  color: var(--glass-text-muted);
+  padding: 0.42rem 0.85rem;
+  font-size: 0.72rem;
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-weight: 500;
+  cursor: pointer;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  transition: all 0.15s ease;
+  position: relative;
+  top: 1px;
+}
+
+.code-subtab-btn:hover {
+  color: var(--glass-text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.code-subtab-btn.active {
+  color: var(--glass-text);
+  background: rgba(12, 12, 20, 0.8);
+  border-color: var(--glass-border-frosted);
+  border-bottom: 1px solid rgba(12, 12, 20, 0.8);
+  font-weight: 600;
+}
+
+/* Code pane container */
+.code-pane-container {
+  display: flex;
+  flex-direction: column;
+  background: rgba(12, 12, 20, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  flex: 1;
+}
+
+.code-pane-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.code-pane-filename {
+  font-size: 0.68rem;
+  color: var(--glass-text-muted);
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  font-weight: 600;
+}
+
+.code-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--glass-text-muted);
+  padding: 0.3rem 0.65rem;
+  border-radius: 5px;
+  font-family: inherit;
+  font-size: 0.68rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.code-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--glass-text);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.copy-btn-icon {
+  flex-shrink: 0;
+}
+
+.code-pane-body {
+  padding: 1.25rem;
+  overflow: auto;
+  max-height: 480px;
+}
+
+.code-pane-body pre {
+  margin: 0;
+  text-align: left;
+}
+
+.code-pane-body code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #e6edf3;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  tab-size: 2;
+}
+
+/* ============================================
+   SYNTAX HIGHLIGHTING CLASSES
+   ============================================ */
+.code-keyword {
+  color: #ff7b72; /* Light reddish-pink */
+  font-weight: 600;
+}
+
+.code-type {
+  color: #ffa657; /* Light orange-yellow (components, interfaces, types) */
+}
+
+.code-string {
+  color: #a5d6ff; /* Soft sky blue */
+}
+
+.code-comment {
+  color: #8b949e; /* Muted gray-green */
+  font-style: italic;
+}
+
+.code-function {
+  color: #d2a8ff; /* Soft lavender-purple */
+}
+
+.code-class {
+  color: #79c0ff; /* Light teal-blue */
+}
+
+.code-variable {
+  color: #ff7b72;
+}
+
+.code-property {
+  color: #7ee787; /* Soft green */
+}
+
+.showcase-info-help {
+  width: 100%;
+  max-width: none;
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--glass-text-muted);
+  opacity: 0.8;
+}
