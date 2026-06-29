@@ -1,4 +1,8 @@
-# ✨ Glasscn
+# ✨ glasscn
+
+<p align="center">
+  <img src="./og-banner.png" alt="glasscn banner" width="100%" />
+</p>
 
 > A premium glassmorphic React component library — like [shadcn/ui](https://ui.shadcn.com), but for glass.
 
@@ -26,32 +30,72 @@ Three glass presets out of the box:
 
 ## 🚀 Quick Start
 
-### Install via CLI
+Follow these 4 simple steps to integrate glassmorphism into your application:
+
+### Step 1: Initialize in your project
+Run the initialization command at the root of your React/Next.js project:
 
 ```bash
-# Initialize glasscn in your project
 npx glasscn init
-
-# Add any component
-npx glasscn add glass-button
-npx glasscn add glass-modal
-npx glasscn add glass-card
 ```
 
-The CLI fetches the component source code directly into your project — you own every line of code. No hidden dependencies.
+This creates a `glasscn.json` configuration file:
+```json
+{
+  "style": "src/glassify.css",
+  "components": "src/components/glassify",
+  "utils": "src/lib/utils.ts"
+}
+```
 
-### What `init` does
+It also:
+- Downloads core tokens (`tokens.css`) and keyframes (`animations.css`) into your components folder.
+- Creates the class merging utility `utils.ts` (using `clsx` and `tailwind-merge` if present, or fallback utility).
+- Creates `src/glassify.css` with the core styles imported.
 
-- Creates a `glasscn.json` config file
-- Downloads core style tokens (`tokens.css`, `animations.css`)
-- Sets up the `cn()` utility helper
-- Creates a main `glassify.css` entrypoint with all imports wired up
+### Step 2: Import the styling entrypoint
+In your main app entrypoint (e.g., `src/main.tsx`, `src/index.tsx`, or `src/app/layout.tsx`), import the stylesheet:
 
-### What `add` does
+```typescript
+import './glassify.css';
+```
 
-- Fetches the component's `index.tsx` and `styles.css` from the registry
-- Rewrites import paths to match your project structure
-- Auto-registers the component's stylesheet in your main CSS
+### Step 3: Add a component
+Use the `add` command to copy component source code directly into your codebase:
+
+```bash
+npx glasscn add glass-button
+```
+
+This will download:
+- `index.tsx` (React component structure)
+- `styles.css` (Component-specific glass styling variables)
+
+The CLI automatically rewrites the import paths of the `cn` utility inside `index.tsx` to match your local project and registers the component style inside `src/glassify.css`.
+
+### Step 4: Use the component
+Import and use the component inside your React pages:
+
+```tsx
+import React from 'react';
+import { GlassButton } from './components/glassify/glass-button';
+
+export default function Page() {
+  return (
+    <div className="flex gap-4 p-8 bg-gradient-to-br from-indigo-900 to-purple-950 min-h-screen items-center justify-center">
+      <GlassButton glass="frosted" variant="solid">
+        Frosted Button
+      </GlassButton>
+      <GlassButton glass="liquid" variant="outline">
+        Liquid Button
+      </GlassButton>
+      <GlassButton glass="matte" variant="ghost">
+        Matte Button
+      </GlassButton>
+    </div>
+  );
+}
+```
 
 ---
 
