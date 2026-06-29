@@ -17,49 +17,46 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col font-sans overflow-x-hidden">
-      {/* Background Mesh Gradients */}
+    <div className="site-shell">
       <div className="glass-mesh-bg">
-        <div className="glass-mesh-orb w-[500px] h-[500px] bg-indigo-500/10 top-[-100px] left-[-100px]" />
-        <div className="glass-mesh-orb w-[600px] h-[600px] bg-purple-500/10 bottom-[-100px] right-[-100px]" />
+        <div className="glass-mesh-orb h-[520px] w-[520px] bg-indigo-500/10 left-[-140px] top-[-120px]" />
+        <div className="glass-mesh-orb h-[540px] w-[540px] bg-purple-500/10 right-[-160px] bottom-[-160px]" />
       </div>
-
-      {/* Interactive Dot Grid Background from sonusid.in */}
-      <DotGrid />
+      <DotGrid className="hidden md:block" />
 
       <Navbar />
 
-      <main className="flex-1 max-w-3xl mx-auto w-full px-4 py-16 relative z-10">
-        <Link href="/blog" className="inline-flex items-center gap-2 text-xs font-medium text-slate-500 hover:text-indigo-500 mb-8 transition-colors">
-          <ArrowLeft className="w-3.5 h-3.5" />
+      <main className="site-main flex-1 !max-w-4xl">
+        <Link href="/blog" className="mb-6 inline-flex items-center gap-2 text-xs font-medium text-slate-500 transition-colors hover:text-indigo-500 dark:text-zinc-400">
+          <ArrowLeft className="h-3.5 w-3.5" />
           Back to all posts
         </Link>
 
-        <article className="flex flex-col gap-8">
+        <article>
           <GlassPanel
             glass="matte"
             title={post.title}
             description={post.excerpt}
-            className="p-8 md:p-12 border border-white/5 flex flex-col gap-6 text-left"
+            className="border border-black/10 p-6 text-left dark:border-white/10 md:p-10"
           >
-            <div className="flex items-center gap-4 text-xs font-mono text-zinc-500 border-b border-white/10 pb-6 w-full">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
+            <div className="mb-7 flex flex-wrap items-center gap-x-6 gap-y-2 border-b border-black/10 pb-5 text-xs font-mono text-slate-500 dark:border-white/10 dark:text-zinc-400">
+              <div className="flex items-center gap-1.5">
+                <Calendar className="h-4 w-4" />
                 <span>{post.date}</span>
               </div>
-              <div className="flex items-center gap-2">
-                <User className="w-4 h-4" />
+              <div className="flex items-center gap-1.5">
+                <User className="h-4 w-4" />
                 <span>By {post.author}</span>
               </div>
             </div>
 
-            <div className="w-full">
+            <div className="w-full max-w-none">
               <MarkdownRenderer content={post.content} />
             </div>
 
-            <div className="flex flex-wrap gap-2 pt-6 border-t border-white/10 w-full mt-4">
+            <div className="mt-8 flex flex-wrap gap-2 border-t border-black/10 pt-6 dark:border-white/10">
               {post.tags.map((tag) => (
-                <span key={tag} className="text-xs font-mono border border-black/10 dark:border-white/10 px-2.5 py-0.5 rounded">
+                <span key={tag} className="rounded border border-black/10 px-2.5 py-0.5 text-xs font-mono dark:border-white/10">
                   #{tag}
                 </span>
               ))}
@@ -68,10 +65,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         </article>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-black/5 dark:border-white/[0.05] bg-white/20 dark:bg-black/20 backdrop-blur-md py-8 mt-16 relative z-10">
-        <div className="max-w-3xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <p>© 2026 glasscn. All rights reserved.</p>
+      <footer className="site-footer">
+        <div className="site-footer-inner flex flex-col items-center justify-between gap-4 text-xs text-slate-500 sm:flex-row dark:text-zinc-400">
+          <p>© 2026 glasscn. Crafted for modern interfaces.</p>
           <div className="flex gap-4">
             <Link href="/" className="hover:text-indigo-500 transition-colors">Home</Link>
             <Link href="/blog" className="hover:text-indigo-500 transition-colors">Blog</Link>

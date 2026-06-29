@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { cn } from "../lib/utils";
 
-const DotGrid = () => {
+const DotGrid = ({ className }: { className?: string }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -80,10 +81,10 @@ const DotGrid = () => {
     window.addEventListener("mouseleave", handleMouseLeave);
 
     const getForegroundColor = () => {
-      const hsl = getComputedStyle(document.documentElement)
+      const color = getComputedStyle(document.documentElement)
         .getPropertyValue("--foreground")
         .trim();
-      return hsl.startsWith('hsl') ? hsl : `hsl(${hsl})`;
+      return color;
     };
 
     const easeOut = (t: number): number => {
@@ -224,20 +225,20 @@ const DotGrid = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute inset-0 z-0 overflow-hidden pointer-events-none"
+      className={cn("absolute inset-0 z-0 overflow-hidden pointer-events-none", className)}
       style={{ height: "100%" }}
     >
       <div
-        className="absolute inset-0 transition-opacity duration-1000 opacity-[0.4] dark:opacity-[0.2]"
+        className="absolute inset-0 opacity-[0.03] transition-opacity duration-1000 dark:opacity-[0.02]"
         style={{
           background:
-            "radial-gradient(circle at 50% 50%, hsl(var(--foreground) / 0.1) 0%, transparent 60%)",
+            "radial-gradient(circle at 50% 50%, var(--foreground) 0%, transparent 60%)",
         }}
       />
 
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 opacity-100 mix-blend-difference dark:mix-blend-normal transition-opacity duration-1000"
+        className="absolute inset-0 opacity-70 transition-opacity duration-1000 dark:opacity-50"
       />
 
       <div

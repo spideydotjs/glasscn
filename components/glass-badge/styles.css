@@ -17,8 +17,8 @@
   -webkit-backdrop-filter: var(--glass-filter-matte);
 }
 .glass-badge[data-glass="frosted"].glass-badge-default {
-  background: var(--glass-primary);
-  color: #ffffff;
+  background: var(--glass-text);
+  color: var(--glass-text-inverse);
 }
 .glass-badge[data-glass="frosted"].glass-badge-secondary {
   background: var(--glass-bg-frosted);

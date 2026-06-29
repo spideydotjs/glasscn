@@ -7,69 +7,38 @@
   --glass-speed-normal: 0.3s;
   --glass-speed-slow: 0.6s;
 
-  /* Theme Defaults - Dark Mode */
-  --glass-text: #f3f4f6;
-  --glass-text-muted: rgba(243, 244, 246, 0.6);
-  --glass-text-inverse: #0b0b0f;        /* Text on filled/solid bright surfaces */
-  --glass-primary: rgba(255, 255, 255, 0.08);
-  --glass-primary-hover: rgba(255, 255, 255, 0.15);
-
-  /* 1. Frosted Glass — classic frosted window, moderate blur, faint white tint */
-  --glass-bg-frosted: rgba(255, 255, 255, 0.03);
-  --glass-filter-frosted: blur(16px) saturate(180%);
-  --glass-border-frosted: rgba(255, 255, 255, 0.12);
-  --glass-shadow-frosted: rgba(0, 0, 0, 0.2);
-
-  /* 2. Liquid Glass — crystal clear, minimal blur, near-invisible background */
-  --glass-bg-liquid: rgba(255, 255, 255, 0.01);
-  --glass-filter-liquid: blur(6px) saturate(200%) brightness(1.05);
-  --glass-border-liquid: rgba(255, 255, 255, 0.18);
-  --glass-shadow-liquid: rgba(0, 0, 0, 0.12);
-
-  /* 3. Matte Glass — heavy frosted, strongest blur, slight tint */
-  --glass-bg-matte: rgba(15, 15, 22, 0.65);
-  --glass-filter-matte: blur(28px) saturate(160%);
-  --glass-border-matte: rgba(255, 255, 255, 0.08);
-  --glass-shadow-matte: 0 12px 40px rgba(0, 0, 0, 0.4);
-}
-
-/* Light Theme Overrides */
-:root[data-theme="light"],
-body[data-theme="light"],
-.light,
-html:not(.dark) {
+  /* Theme Defaults - Light Mode */
   --glass-text: #111827;
   --glass-text-muted: rgba(17, 24, 39, 0.6);
   --glass-text-inverse: #f3f4f6;        /* Text on filled/solid dark surfaces */
   --glass-primary: rgba(0, 0, 0, 0.05);
   --glass-primary-hover: rgba(0, 0, 0, 0.1);
 
-  /* 1. Frosted Glass (Light Theme) */
+  /* 1. Frosted Glass — classic frosted window, moderate blur */
   --glass-bg-frosted: rgba(255, 255, 255, 0.15);
   --glass-filter-frosted: blur(16px) saturate(180%);
   --glass-border-frosted: rgba(0, 0, 0, 0.06);
   --glass-shadow-frosted: 0 8px 32px rgba(0, 0, 0, 0.06);
 
-  /* 2. Liquid Glass (Light Theme) */
+  /* 2. Liquid Glass — crystal clear, minimal blur */
   --glass-bg-liquid: rgba(255, 255, 255, 0.05);
   --glass-filter-liquid: blur(6px) saturate(200%) brightness(1.02);
   --glass-border-liquid: rgba(0, 0, 0, 0.08);
   --glass-shadow-liquid: 0 4px 20px rgba(0, 0, 0, 0.04);
 
-  /* 3. Matte Glass (Light Theme) */
+  /* 3. Matte Glass — heavy frosted, strongest blur */
   --glass-bg-matte: rgba(255, 255, 255, 0.72);
   --glass-filter-matte: blur(28px) saturate(140%);
   --glass-border-matte: rgba(0, 0, 0, 0.06);
   --glass-shadow-matte: 0 12px 40px rgba(0, 0, 0, 0.06);
 }
 
-/* Dark Mode Overrides (if prefers-color-scheme is active and data-theme is unset) */
+/* Dark Mode Overrides (if prefers-color-scheme is active) */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]),
-  body:not([data-theme="light"]) {
+  :root {
     --glass-text: #f3f4f6;
     --glass-text-muted: rgba(243, 244, 246, 0.6);
-    --glass-text-inverse: #0b0b0f;
+    --glass-text-inverse: #0b0b0f;        /* Text on filled/solid bright surfaces */
     --glass-primary: rgba(255, 255, 255, 0.08);
     --glass-primary-hover: rgba(255, 255, 255, 0.15);
 
@@ -83,9 +52,59 @@ html:not(.dark) {
     --glass-border-liquid: rgba(255, 255, 255, 0.18);
     --glass-shadow-liquid: rgba(0, 0, 0, 0.12);
 
-    --glass-bg-matte: rgba(255, 255, 255, 0.04);
-    --glass-filter-matte: blur(28px) saturate(140%);
-    --glass-border-matte: rgba(255, 255, 255, 0.06);
-    --glass-shadow-matte: rgba(0, 0, 0, 0.3);
+    --glass-bg-matte: rgba(15, 15, 22, 0.65);
+    --glass-filter-matte: blur(28px) saturate(160%);
+    --glass-border-matte: rgba(255, 255, 255, 0.08);
+    --glass-shadow-matte: 0 12px 40px rgba(0, 0, 0, 0.4);
   }
+}
+
+/* Class-based Dark Mode Overrides */
+.dark,
+[data-theme="dark"] {
+  --glass-text: #f3f4f6;
+  --glass-text-muted: rgba(243, 244, 246, 0.6);
+  --glass-text-inverse: #0b0b0f;
+  --glass-primary: rgba(255, 255, 255, 0.08);
+  --glass-primary-hover: rgba(255, 255, 255, 0.15);
+
+  --glass-bg-frosted: rgba(255, 255, 255, 0.03);
+  --glass-filter-frosted: blur(16px) saturate(180%);
+  --glass-border-frosted: rgba(255, 255, 255, 0.12);
+  --glass-shadow-frosted: rgba(0, 0, 0, 0.2);
+
+  --glass-bg-liquid: rgba(255, 255, 255, 0.01);
+  --glass-filter-liquid: blur(6px) saturate(200%) brightness(1.05);
+  --glass-border-liquid: rgba(255, 255, 255, 0.18);
+  --glass-shadow-liquid: rgba(0, 0, 0, 0.12);
+
+  --glass-bg-matte: rgba(15, 15, 22, 0.65);
+  --glass-filter-matte: blur(28px) saturate(160%);
+  --glass-border-matte: rgba(255, 255, 255, 0.08);
+  --glass-shadow-matte: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Class/data-attribute Light Mode Overrides (always win over system dark media) */
+.light,
+[data-theme="light"] {
+  --glass-text: #111827;
+  --glass-text-muted: rgba(17, 24, 39, 0.6);
+  --glass-text-inverse: #f3f4f6;
+  --glass-primary: rgba(0, 0, 0, 0.05);
+  --glass-primary-hover: rgba(0, 0, 0, 0.1);
+
+  --glass-bg-frosted: rgba(255, 255, 255, 0.15);
+  --glass-filter-frosted: blur(16px) saturate(180%);
+  --glass-border-frosted: rgba(0, 0, 0, 0.06);
+  --glass-shadow-frosted: 0 8px 32px rgba(0, 0, 0, 0.06);
+
+  --glass-bg-liquid: rgba(255, 255, 255, 0.05);
+  --glass-filter-liquid: blur(6px) saturate(200%) brightness(1.02);
+  --glass-border-liquid: rgba(0, 0, 0, 0.08);
+  --glass-shadow-liquid: 0 4px 20px rgba(0, 0, 0, 0.04);
+
+  --glass-bg-matte: rgba(255, 255, 255, 0.72);
+  --glass-filter-matte: blur(28px) saturate(140%);
+  --glass-border-matte: rgba(0, 0, 0, 0.06);
+  --glass-shadow-matte: 0 12px 40px rgba(0, 0, 0, 0.06);
 }

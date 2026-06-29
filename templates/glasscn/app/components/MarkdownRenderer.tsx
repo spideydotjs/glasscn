@@ -4,9 +4,10 @@ export function MarkdownRenderer({ content }: { content: string }) {
   const lines = content.split('\n');
   let inCodeBlock = false;
   let codeLines: string[] = [];
-  let codeLang = '';
+  let inList = false;
 
   const parsedElements: React.ReactNode[] = [];
+  let listItems: React.ReactNode[] = [];
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -15,14 +16,13 @@ export function MarkdownRenderer({ content }: { content: string }) {
       if (inCodeBlock) {
         inCodeBlock = false;
         parsedElements.push(
-          <pre key={`code-${i}`} className="p-4 rounded-lg bg-black/50 border border-white/10 overflow-x-auto my-4 text-xs font-mono text-indigo-300">
+          <pre key={`code-${i}`} className="my-5 overflow-x-auto rounded-lg border border-black/10 bg-slate-900/95 p-4 text-xs text-indigo-100 shadow-sm dark:border-white/10">
             <code>{codeLines.join('\n')}</code>
           </pre>
         );
         codeLines = [];
       } else {
         inCodeBlock = true;
-        codeLang = line.replace('```', '').trim();
       }
       continue;
     }
@@ -32,9 +32,29 @@ export function MarkdownRenderer({ content }: { content: string }) {
       continue;
     }
 
+    if (line.startsWith('- ')) {
+      inList = true;
+      listItems.push(
+        <li key={i} className="ml-5 list-disc text-sm leading-relaxed text-slate-600 dark:text-zinc-300 md:text-base">
+          {line.replace('- ', '')}
+        </li>
+      );
+      continue;
+    }
+
+    if (inList) {
+      parsedElements.push(
+        <ul key={`list-${i}`} className="mb-4 space-y-1.5">
+          {listItems}
+        </ul>
+      );
+      listItems = [];
+      inList = false;
+    }
+
     if (line.startsWith('# ')) {
       parsedElements.push(
-        <h1 key={i} className="text-2xl md:text-3xl font-extrabold tracking-tight mt-8 mb-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+        <h1 key={i} className="mb-4 mt-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-2xl font-extrabold tracking-tight text-transparent md:text-3xl">
           {line.replace('# ', '')}
         </h1>
       );
@@ -42,7 +62,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
     }
     if (line.startsWith('## ')) {
       parsedElements.push(
-        <h2 key={i} className="text-lg md:text-xl font-bold tracking-tight mt-6 mb-3 text-slate-800 dark:text-zinc-100">
+        <h2 key={i} className="mb-3 mt-7 text-xl font-bold tracking-tight text-slate-800 dark:text-zinc-100 md:text-2xl">
           {line.replace('## ', '')}
         </h2>
       );
@@ -50,30 +70,29 @@ export function MarkdownRenderer({ content }: { content: string }) {
     }
     if (line.startsWith('### ')) {
       parsedElements.push(
-        <h3 key={i} className="text-base md:text-lg font-semibold tracking-tight mt-5 mb-2 text-slate-800 dark:text-zinc-200">
+        <h3 key={i} className="mb-2 mt-6 text-lg font-semibold tracking-tight text-slate-800 dark:text-zinc-200 md:text-xl">
           {line.replace('### ', '')}
         </h3>
       );
       continue;
     }
 
-    if (line.startsWith('- ')) {
-      parsedElements.push(
-        <li key={i} className="ml-6 list-disc text-slate-600 dark:text-zinc-300 mb-1.5 leading-relaxed text-sm md:text-base">
-          {line.replace('- ', '')}
-        </li>
-      );
-      continue;
-    }
-
     if (line.trim() !== '') {
       parsedElements.push(
-        <p key={i} className="text-slate-600 dark:text-zinc-300 leading-relaxed mb-4 text-sm md:text-base">
+        <p key={i} className="mb-4 text-sm leading-relaxed text-slate-600 dark:text-zinc-300 md:text-base">
           {line}
         </p>
       );
     }
   }
 
-  return <div className="markdown-body">{parsedElements}</div>;
+  if (inList && listItems.length > 0) {
+    parsedElements.push(
+      <ul key="list-final" className="mb-4 space-y-1.5">
+        {listItems}
+      </ul>
+    );
+  }
+
+  return <div className="markdown-body max-w-none">{parsedElements}</div>;
 }

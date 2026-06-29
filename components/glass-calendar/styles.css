@@ -94,8 +94,8 @@
 }
 
 .glass-calendar-day-selected {
-  background: var(--glass-primary) !important;
-  color: #ffffff !important;
+  background: var(--glass-text) !important;
+  color: var(--glass-text-inverse) !important;
   font-weight: 600;
 }
 

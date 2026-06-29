@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8fafc;
+  --background: #f7f8fc;
   --foreground: #0f172a;
 }
 
 .dark {
-  --background: #030307;
+  --background: #05050a;
   --foreground: #f8fafc;
 }
 
@@ -21,13 +21,57 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -3;
+  background:
+    radial-gradient(circle at 12% 10%, rgba(99, 102, 241, 0.12), transparent 42%),
+    radial-gradient(circle at 84% 16%, rgba(168, 85, 247, 0.12), transparent 36%),
+    radial-gradient(circle at 60% 86%, rgba(236, 72, 153, 0.08), transparent 38%);
+}
+
+.dark body::before {
+  background:
+    radial-gradient(circle at 12% 10%, rgba(99, 102, 241, 0.14), transparent 42%),
+    radial-gradient(circle at 84% 16%, rgba(168, 85, 247, 0.12), transparent 36%),
+    radial-gradient(circle at 60% 86%, rgba(236, 72, 153, 0.1), transparent 38%);
+}
+
+.site-shell {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: clip;
+}
+
+.site-main {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 2.75rem 1rem 4rem;
+}
+
+@media (min-width: 768px) {
+  .site-main {
+    padding: 4rem 2rem 5rem;
+  }
 }
 
 /* Background mesh gradients to highlight glassmorphism */
 .glass-mesh-bg {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   overflow: hidden;
   pointer-events: none;
 }
@@ -35,12 +79,34 @@ body {
 .glass-mesh-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
-  opacity: 0.25;
+  filter: blur(110px);
+  opacity: 0.14;
 }
 
 .dark .glass-mesh-orb {
-  opacity: 0.18;
+  opacity: 0.16;
+}
+
+.site-footer {
+  position: relative;
+  z-index: 10;
+  margin-top: auto;
+  border-top: 1px solid color-mix(in srgb, var(--foreground) 10%, transparent);
+  background: color-mix(in srgb, var(--background) 82%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.site-footer-inner {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 1.25rem 1rem;
+}
+
+@media (min-width: 768px) {
+  .site-footer-inner {
+    padding: 1.4rem 2rem;
+  }
 }
 
 @keyframes smoothPulse {

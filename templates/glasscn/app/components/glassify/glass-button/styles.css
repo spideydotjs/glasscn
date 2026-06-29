@@ -45,11 +45,11 @@
   box-shadow: 0 4px 12px var(--glass-shadow-frosted);
 }
 .glass-button[data-glass="frosted"].glass-button-solid {
-  background: var(--glass-primary);
-  color: #ffffff;
+  background: var(--glass-text);
+  color: var(--glass-text-inverse);
 }
 .glass-button[data-glass="frosted"].glass-button-solid:hover {
-  background: var(--glass-primary-hover);
+  opacity: 0.92;
 }
 .glass-button[data-glass="frosted"].glass-button-outline {
   background: var(--glass-bg-frosted);
