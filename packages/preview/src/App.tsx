@@ -724,7 +724,7 @@ export default function App() {
   const getActiveCodeText = () => {
     switch (codeTab) {
       case 'cli':
-        return `npx @firojsiddiquie/glassify add ${selectedComp}`;
+        return `npx glasscn add ${selectedComp}`;
       case 'tsx':
         return tsxCode;
       case 'css':
